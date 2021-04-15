@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BookRest</string>
+    <string name="logo">Logo</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="submit">Sign in</string>
+    <string name="hint_confirm">Confirm password</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="login_log_in">Already have profile? <u><i>Log in</i></u></string>
+</resources>
