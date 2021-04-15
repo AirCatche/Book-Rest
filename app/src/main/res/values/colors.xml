@@ -7,25 +7,52 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
-<!--    first theme colors-->
 
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="on_primary">#C5CAE9</color>
-    <color name="accent">#FF4081</color>
-    <color name="accent_disabled">#40FF4081</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="divider">#BDBDBD</color>
+    <!--    logo colors-->
+    <color name="logo_stroke1">#3F51B5</color>
+    <color name="logo_filled1">#f06292</color>
+    <!--    first theme colors-->
+    <color name="primary_lighter1">#e8eaf6</color>
+    <color name="primary_light1">#7986cb</color>
+    <color name="primary1">#3F51B5</color>
+    <color name="primary_dark1">#303F9F</color>
+    <color name="on_primary1">#FFFFFF</color>
+
+    <color name="accent_light1">#f06292</color>
+    <color name="accent1">#e91e63</color>
+    <color name="accent_dark1">#FF4081</color>
+    <color name="on_accent1">#FFFFFF</color>>
+    <color name="accent_transparent1">#40FF4081</color>
+
+    <color name="primary_text1">#FFFFFF</color>
+    <color name="secondary_text1">#004D40</color>
+    <color name="icons1">#FFFFFF</color>
+
     <!--    second theme colors-->
-        <color name="primary_2">#CDDC39</color>
-        <color name="primary_dark_2">#AFB42B</color>
-        <color name="primary_light_2">#F0F4C3</color>
-        <color name="accent_2">#00BCD4</color>
-        <color name="primary_text_2">#212121</color>
-        <color name="secondary_text_2">#757575</color>
-        <color name="icons_2">#212121</color>
-        <color name="divider_2">#BDBDBD</color>
+    <!--    second logo colors-->
+
+    <color name="logo_stroke">#AFB42B</color>
+    <color name="logo_filled">#0097a7</color>
+
+    <!--    second theme colors-->
+    <color name="primary_lighter">#b2ebf2</color>
+    <color name="primary_light">#4dd0e1</color>
+    <color name="primary">#00BCD4</color>
+    <color name="primary_dark">#0097a7</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_transparent">#4000BCD4</color>
+
+
+    <color name="accent_lighter">#f0f4c3</color>
+    <color name="accent_light">#F0F4C3</color>
+    <color name="accent">#CDDC39</color>
+    <color name="accent_dark">#AFB42B</color>
+    <color name="on_accent">#FFFFFF</color>>
+    <color name="accent_transparent">#40CDDC39</color>
+
+    <color name="primary_text">#FFFFFF</color>
+    <color name="secondary_text">#004D40</color>
+    <color name="icons">#FFFFFF</color>
+
 </resources>
 

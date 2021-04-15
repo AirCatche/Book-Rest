@@ -4,18 +4,21 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/divider</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/accent</item>
-        <item name="colorSecondaryVariant">@color/secondary_text</item>
-        <item name="colorOnSecondary">@color/icons</item>
+        <item name="colorSecondaryVariant">@color/accent_dark</item>
+        <item name="colorOnSecondary">@color/on_accent</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
+        <item name="colorError">@color/accent</item>
+        <item name="android:colorBackground">@color/primary_light</item>
+        <item name="colorOnBackground">@color/accent</item>
+        <item name="android:textColor">@color/icons</item>
+        <item name="android:color">@color/icons</item>
     </style>
 </resources>
-
 
 
 

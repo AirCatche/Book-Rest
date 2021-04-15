@@ -3,6 +3,7 @@ package com.slobodyanyuk_mykhailo99.bookrest.ui.auth
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
+import com.google.android.material.resources.TextAppearance
 
 import java.util.regex.Pattern
 
@@ -54,6 +55,7 @@ class AuthViewModel : ViewModel() {
         isValid.postValue(email&&password&&confirmation)
 
     }
+
 //    fun onSubmitClick(view: View) {
 //        authListener?.onStarted()
 //        Log.d(TAG, "onSubmitClick: $email")
