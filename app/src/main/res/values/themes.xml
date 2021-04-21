@@ -17,6 +17,8 @@
         <item name="colorOnBackground">@color/accent</item>
         <item name="android:textColor">@color/icons</item>
         <item name="android:color">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/primary_light</item>
+        <item name="navigationIconTint">@color/accent</item>
     </style>
 </resources>
 

@@ -37,8 +37,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,12 +52,11 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/hint_email"
                 android:textColorHint="@color/primary"
-                app:errorText="@{viewmodel.emailErrorMessage}"
-                app:helperText="*"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                >
+                app:errorText="@{viewmodel.emailErrorMessage}"
+                app:helperText="*">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -73,29 +72,30 @@
                     tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
                 android:textColorHint="@color/primary"
-                app:errorText="@{viewmodel.passwordErrorMessage}"
-                app:helperText="*"
-                app:passwordToggleEnabled="true"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                >
+                app:errorText="@{viewmodel.passwordErrorMessage}"
+                app:helperText="*"
+                app:passwordToggleEnabled="true">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
+
                     android:autofillHints="password"
                     android:background="@drawable/login_et_input"
                     android:drawableStart="@drawable/ic_lock_custom"
                     android:drawablePadding="12dp"
                     android:inputType="textPassword"
                     android:text="@={viewmodel.password}"
+                    android:textColor="@color/primary_dark"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,12 +104,11 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_confirm"
                 android:textColorHint="@color/primary"
-                app:errorText="@{viewmodel.confirmationErrorMessage}"
-                app:helperText="*"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                >
+                app:errorText="@{viewmodel.confirmationErrorMessage}"
+                app:helperText="*">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -120,33 +119,51 @@
                     android:drawablePadding="12dp"
                     android:inputType="textPassword"
                     android:text="@={viewmodel.confirmation}"
+                    android:textColor="@color/primary_dark"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tv_login_forgot_password"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/login_forgot_password"
-                android:textColor="@color/on_primary"
-                android:textSize="18sp" />
+                android:hint="@string/login_username"
+                android:textColorHint="@color/primary"
+                app:boxBackgroundMode="filled"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:errorText="@{viewmodel.usernameErrorMessage}"
+                app:helperText="*">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:autofillHints="username"
+                    android:background="@drawable/login_et_input"
+                    android:drawableStart="@drawable/ic_person_custom"
+                    android:drawablePadding="12dp"
+                    android:inputType="textNoSuggestions"
+                    android:text="@={viewmodel.username}"
+                    android:textColor="@color/primary_dark"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
-                android:layout_width="112dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center"
+                android:layout_width="96dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/login_submit_button"
                 android:enabled="@{viewmodel.isValid()}"
 
                 android:text="@string/submit"
                 android:textColor="@color/on_accent"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:onClick="@{viewmodel::onSignUp}" />
             <!--            android:visibility="@{viewmodel.isValid() ? View.VISIBLE : View.GONE}"-->
-            <!--                android:onClick="@{viewmodel::onSubmitClick}" />-->
+
             <TextView
                 android:id="@+id/tv_login"
                 android:layout_width="wrap_content"

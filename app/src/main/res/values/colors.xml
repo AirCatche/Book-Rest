@@ -54,5 +54,23 @@
     <color name="secondary_text">#004D40</color>
     <color name="icons">#FFFFFF</color>
 
+    <color name="primary_m">#b2ebf2</color>
+    <color name="primary_variant">#4dd0e1</color>
+    <color name="on_primary_m"></color>
+
+    <color name="secondary">#0097a7</color>
+    <color name="secondary_variant">#FFFFFF</color>
+    <color name="on_secondary">#4000BCD4</color>
+
+    <color name="background">#f0f4c3</color>
+    <color name="surface">#F0F4C3</color>
+    <color name="error">#CDDC39</color>
+    <color name="on_background">#AFB42B</color>
+    <color name="on_surface">#FFFFFF</color>>
+    <color name="on_error">#40CDDC39</color>
+
+
+
+
 </resources>
 

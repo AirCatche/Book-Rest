@@ -15,23 +15,28 @@ data class ValidationModel(val isValid: Boolean, val message: String) {
         const val FAILURE_EMAIL_EMPTY = "Please enter email address"
         const val FAILURE_EMAIL_INCORRECT = "Please check correctness of email address"
         const val FAILURE_PASSWORD_EMPTY = "Please enter password"
-        const val FAILURE_PASSWORD_INCORRECT =
-            "Password should consist of: number[0-9], min 1 letter[a-z]. min length 6 symbols"
+        const val FAILURE_PASSWORD_INCORRECT = "Weak password. Allowing a-z, numbers"
         const val FAILURE_CONFIRMATION_PASSWORD_EMPTY = "Please enter password first"
         const val FAILURE_PASSWORD_AFTER_CONFIRMATION = "Your password different from confirmation now"
         const val FAILURE_CONFIRMATION_EMPTY = "Please confirm your password"
         const val FAILURE_CONFIRMATION_INCORRECT = "Passwords should match!"
+        const val FAILURE_USERNAME_EMPTY = "Please enter username"
+        const val FAILURE_USERNAME_INCORRECT = "Passwords should be unique! Change it and try again"
         const val SUCCESS = ""
     }
 }
 
 fun String.validateEmail(email: Context): ValidationModel {
-    return if (this.trim().isEmpty()) {
-        ValidationModel(false, ValidationModel.FAILURE_EMAIL_EMPTY)
-    } else if (!Patterns.EMAIL_ADDRESS.matcher(this).matches()) {
-        ValidationModel(false, ValidationModel.FAILURE_EMAIL_INCORRECT)
-    } else {
-        ValidationModel(true, ValidationModel.SUCCESS)
+    return when {
+        this.trim().isEmpty() -> {
+            ValidationModel(false, ValidationModel.FAILURE_EMAIL_EMPTY)
+        }
+        (!Patterns.EMAIL_ADDRESS.matcher(this).matches()) -> {
+            ValidationModel(false, ValidationModel.FAILURE_EMAIL_INCORRECT)
+        }
+        else -> {
+            ValidationModel(true, ValidationModel.SUCCESS)
+        }
     }
 
 }
@@ -63,6 +68,16 @@ fun String.validateConfirmation(password: String?, confirmation: Context): Valid
         }
         password != this -> {
             ValidationModel(false, ValidationModel.FAILURE_CONFIRMATION_INCORRECT)
+        }
+        else -> {
+            ValidationModel(true, ValidationModel.SUCCESS)
+        }
+    }
+}
+fun String.validateUsername(username: Context): ValidationModel {
+    return when {
+        this.trim().isEmpty() -> {
+            ValidationModel(false, ValidationModel.FAILURE_USERNAME_EMPTY)
         }
         else -> {
             ValidationModel(true, ValidationModel.SUCCESS)
