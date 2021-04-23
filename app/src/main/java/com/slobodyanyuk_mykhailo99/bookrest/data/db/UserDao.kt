@@ -11,7 +11,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(user: User) : Long
+    suspend fun upsert(user: User) : Long
 
     @Insert()
 

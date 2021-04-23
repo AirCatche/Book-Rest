@@ -1,20 +1,29 @@
 package com.slobodyanyuk_mykhailo99.bookrest.data.repositories
 
-import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.LoginData
-import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.SignUpData
+import com.slobodyanyuk_mykhailo99.bookrest.data.db.BookRestDatabase
+import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
+import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.LoginRequest
+import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestApi
+import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.LoginResponse
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.SignUpResponse
-import retrofit2.Call
-import retrofit2.Response
 
-class UserRepository {
+class UserRepository(private val api: BookRestApi, private val db: BookRestDatabase): BookRestRequest() {
 
-    suspend fun userLogin(loginData: LoginData) : Response<LoginResponse> {
-        return BookRestApi().userLogin(loginData)
+    suspend fun userLogin(loginData: LoginRequest) : LoginResponse {
+        return apiRequest {
+            api.userLogin(loginData)
+        }
     }
-    suspend fun userSignUp(signUpData: SignUpData) : Response<SignUpResponse> {
-        return BookRestApi().userSignUp(signUpData)
+    suspend fun userSignUp(signUpRequest: SignUpRequest) : SignUpResponse {
+        return apiRequest {
+            api.userSignUp(signUpRequest)
+        }
     }
+
+    suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
+
+    fun getUser() = db.getUserDao().getUser()
 
 }

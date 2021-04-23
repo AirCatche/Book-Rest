@@ -21,7 +21,7 @@ data class ValidationModel(val isValid: Boolean, val message: String) {
         const val FAILURE_CONFIRMATION_EMPTY = "Please confirm your password"
         const val FAILURE_CONFIRMATION_INCORRECT = "Passwords should match!"
         const val FAILURE_USERNAME_EMPTY = "Please enter username"
-        const val FAILURE_USERNAME_INCORRECT = "Passwords should be unique! Change it and try again"
+        //const val FAILURE_USERNAME_INCORRECT = "Passwords should be unique! Change it and try again"
         const val SUCCESS = ""
     }
 }

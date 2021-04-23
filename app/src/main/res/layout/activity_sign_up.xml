@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.slobodyanyuk_mykhailo99.bookrest.ui.auth.AuthViewModel" />
+            type="com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpViewModel" />
 
     </data>
 

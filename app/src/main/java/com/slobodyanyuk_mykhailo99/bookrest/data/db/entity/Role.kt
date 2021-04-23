@@ -2,8 +2,7 @@ package com.slobodyanyuk_mykhailo99.bookrest.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-const val ROLE_USER = 0
-const val ROLE_ADMIN = 1
+const val ROLE = 0
 
 @Entity
 data class Role(
@@ -13,6 +12,6 @@ data class Role(
     var updated_at: String? = null,
     var status: String? = null) {
 
-    @PrimaryKey(autoGenerate = false)
-    var rid: Int = ROLE_USER
+    @PrimaryKey(autoGenerate = true)
+    var uid: Long = 1
 }

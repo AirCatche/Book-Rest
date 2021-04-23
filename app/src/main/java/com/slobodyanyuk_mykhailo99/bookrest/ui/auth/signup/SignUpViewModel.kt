@@ -1,20 +1,17 @@
-package com.slobodyanyuk_mykhailo99.bookrest.ui.auth
+package com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup
 
 import android.content.Context
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 
-import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.SignUpData
-import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
-import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.SignUpResponse
+import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
+import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
+import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
 
-import retrofit2.Response
-
-class AuthViewModel : ViewModel() {
+class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
 
     companion object {
         private const val TAG = "AuthViewModel"
@@ -30,14 +27,15 @@ class AuthViewModel : ViewModel() {
     val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
     val isValid:MutableLiveData<Boolean> = MutableLiveData()
     var isCorrectPicture:MutableLiveData<Boolean> = MutableLiveData()
-
-
     private var isEmailValid: Boolean = false
     private var isPasswordValid: Boolean = false
     private var isConfirmationValid: Boolean = false
     private var isUsernameValid: Boolean = false
-
     var authListener: AuthListener? = null
+
+
+
+    fun getLoggedInUser() = repository.getUser()
 
     fun setupInputObservers (lifecycleOwner: LifecycleOwner, context: Context) {
         email.observe(lifecycleOwner, Observer {
@@ -76,17 +74,22 @@ class AuthViewModel : ViewModel() {
         Log.d(TAG, "onSubmitClick: ${password.value}")
         Log.d(TAG, "onSubmitClick: ${confirmation.value}")
         Log.d(TAG, "onSubmitClick: ${username.value}")
-
-        //STRONG DEPENDENCY MUST BE REWRITE
         Coroutines.main {
             Log.d(TAG, "onSubmitClick: starts coroutine")
-            val signUpData = SignUpData(email.value, password.value, confirmation.value, username.value)
-            val response: Response<SignUpResponse> = UserRepository().userSignUp(signUpData)
-            Log.d(TAG, "onSubmitClick: ${response.isSuccessful} is response")
-            if (response.isSuccessful) {
-                authListener?.onSuccess(response.body()?.user!!)
-            } else {
-                authListener?.onFailure("Error code: ${response.code()}")
+            try {
+                val signUpResponse = repository.userSignUp(SignUpRequest(email.value, password.value, confirmation.value, username.value))
+                Log.d(TAG, "onSignUp: user is ${signUpResponse.user}")
+                signUpResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    repository.saveUser(it)
+                    return@main
+                }
+                Log.d(TAG, "onSignUp: response is ${signUpResponse.user?.username}")
+                signUpResponse.message?.let {
+                    authListener?.onFailure(it)
+                }
+            } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
             }
             Log.d(TAG, "onSignUp: coroutines end")
         }

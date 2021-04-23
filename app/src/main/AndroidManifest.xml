@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookRest">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:name=".ui.auth.SignUpActivity">
+            android:name=".ui.auth.signup.SignUpActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
