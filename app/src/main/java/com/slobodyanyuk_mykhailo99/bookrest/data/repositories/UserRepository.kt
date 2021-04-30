@@ -11,9 +11,9 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.SignUpRespons
 
 class UserRepository(private val api: BookRestApi, private val db: BookRestDatabase): BookRestRequest() {
 
-    suspend fun userLogin(loginData: LoginRequest) : LoginResponse {
+    suspend fun userLogin(loginRequest: LoginRequest) : LoginResponse {
         return apiRequest {
-            api.userLogin(loginData)
+            api.userLogin(loginRequest)
         }
     }
     suspend fun userSignUp(signUpRequest: SignUpRequest) : SignUpResponse {

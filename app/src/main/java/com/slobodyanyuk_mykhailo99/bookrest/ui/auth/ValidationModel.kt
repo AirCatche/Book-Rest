@@ -41,16 +41,13 @@ fun String.validateEmail(email: Context): ValidationModel {
 
 }
 
-fun String.validatePassword(password: Context, confirmation: String?): ValidationModel {
+fun String.validatePassword(password: Context): ValidationModel {
     return when {
         this.trim().isEmpty() -> {
              ValidationModel(false, ValidationModel.FAILURE_PASSWORD_EMPTY)
         }
         !ValidationModel.AUTH_PASSWORD_PATTERN.matcher(this).matches() -> {
             ValidationModel(false, ValidationModel.FAILURE_PASSWORD_INCORRECT)
-        }
-        this != confirmation && confirmation != null -> {
-            ValidationModel(false, ValidationModel.FAILURE_PASSWORD_AFTER_CONFIRMATION)
         }
         else -> {
             ValidationModel(true, ValidationModel.SUCCESS)

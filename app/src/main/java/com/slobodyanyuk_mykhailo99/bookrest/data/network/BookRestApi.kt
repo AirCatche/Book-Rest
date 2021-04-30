@@ -4,6 +4,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.LoginRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.LoginResponse
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.SignUpResponse
+import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,8 +15,12 @@ import retrofit2.http.POST
 interface BookRestApi {
 
     companion object {
-        operator fun invoke() : BookRestApi {
+        operator fun invoke(networkConnInterceptor: NetworkConnInterceptor) : BookRestApi {
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkConnInterceptor)
+                .build()
             return Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl("https://bookrest1.herokuapp.com/api/v1/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

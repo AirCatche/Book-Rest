@@ -2,16 +2,18 @@ package com.slobodyanyuk_mykhailo99.bookrest.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-const val ROLE = 0
+import com.slobodyanyuk_mykhailo99.bookrest.data.db.Users
 
-@Entity
+const val CURRENT_ROLE_ID = 0
+@Entity()
 data class Role(
     var id: Int? = null,
     var name: String? = null,
-    var created_at: String? = null,
-    var updated_at: String? = null,
-    var status: String? = null) {
-
-    @PrimaryKey(autoGenerate = true)
-    var uid: Long = 1
+    var created: String? = null,
+    var updated: String? = null,
+    var status: String? = null,
+   // var users : ArrayList<User>? = null
+) {
+    @PrimaryKey(autoGenerate = false)
+    var rid: Int = CURRENT_ROLE_ID
 }

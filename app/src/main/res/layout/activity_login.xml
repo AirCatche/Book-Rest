@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpViewModel" />
+            type="com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginViewModel" />
 
     </data>
 
@@ -50,83 +50,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/hint_email"
-                android:textColorHint="@color/primary"
-                app:boxBackgroundMode="filled"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:errorText="@{viewmodel.emailErrorMessage}"
-                app:helperText="*">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:autofillHints="email"
-                    android:background="@drawable/login_et_input"
-                    android:drawableStart="@drawable/ic_email_custom"
-                    android:drawablePadding="12dp"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:text="@={viewmodel.email}"
-                    android:textColor="@color/primary_dark"
-                    tools:ignore="LabelFor" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_password"
-                android:textColorHint="@color/primary"
-                app:boxBackgroundMode="filled"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:errorText="@{viewmodel.passwordErrorMessage}"
-                app:helperText="*"
-                app:passwordToggleEnabled="true">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-
-                    android:autofillHints="password"
-                    android:background="@drawable/login_et_input"
-                    android:drawableStart="@drawable/ic_lock_custom"
-                    android:drawablePadding="12dp"
-                    android:inputType="textPassword"
-                    android:text="@={viewmodel.password}"
-                    android:textColor="@color/primary_dark"
-                    tools:ignore="LabelFor" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_confirm"
-                android:textColorHint="@color/primary"
-                app:boxBackgroundMode="filled"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:errorText="@{viewmodel.confirmationErrorMessage}"
-                app:helperText="*">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:autofillHints="password"
-                    android:background="@drawable/login_et_input"
-                    android:drawableStart="@drawable/ic_lock_custom"
-                    android:drawablePadding="12dp"
-                    android:inputType="textPassword"
-                    android:text="@={viewmodel.confirmation}"
-                    android:textColor="@color/primary_dark"
-                    tools:ignore="LabelFor" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:hint="@string/login_username"
                 android:textColorHint="@color/primary"
                 app:boxBackgroundMode="filled"
@@ -147,8 +70,30 @@
                     android:textColor="@color/primary_dark"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password"
+                android:textColorHint="@color/primary"
+                app:boxBackgroundMode="filled"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:errorText="@{viewmodel.passwordErrorMessage}"
+                app:helperText="*"
+                app:passwordToggleEnabled="true">
 
-
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:autofillHints="password"
+                    android:background="@drawable/login_et_input"
+                    android:drawableStart="@drawable/ic_lock_custom"
+                    android:drawablePadding="12dp"
+                    android:inputType="textPassword"
+                    android:text="@={viewmodel.password}"
+                    android:textColor="@color/primary_dark"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
                 android:layout_width="192dp"
@@ -158,11 +103,10 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/login_submit_button"
                 android:enabled="@{viewmodel.isValid()}"
-
-                android:text="@string/submit"
+                android:text="@string/login"
                 android:textColor="@color/on_accent"
                 android:textSize="14sp"
-                android:onClick="@{viewmodel::onSignUpButton}" />
+                android:onClick="@{viewmodel::onLoginButton}" />
 
             <TextView
                 android:id="@+id/tv_login"
@@ -171,10 +115,10 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/login_log_in"
+                android:text="@string/tv_login_no_profile_message"
                 android:textColor="@color/on_primary"
                 android:textSize="18sp"
-                android:onClick="@{viewmodel::onLoginText}"/>
+                android:onClick="@{viewmodel::onSignUpText}"/>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

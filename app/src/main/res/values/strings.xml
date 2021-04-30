@@ -8,4 +8,7 @@
     <string name="login_forgot_password">Forgot Password?</string>
     <string name="login_log_in">Already have profile? <u><i>Log in</i></u></string>
     <string name="login_username">Username</string>
+    <string name="login">Log in</string>
+    <string name="tv_login_no_profile_message">Do not have a profile?
+        <u><i>Sign Up Here</i></u></string>
 </resources>

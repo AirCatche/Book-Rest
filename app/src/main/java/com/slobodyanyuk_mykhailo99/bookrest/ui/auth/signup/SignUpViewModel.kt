@@ -1,6 +1,7 @@
 package com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
@@ -8,8 +9,10 @@ import androidx.lifecycle.*
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
+import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
+import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
 
 class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
 
@@ -26,12 +29,11 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     val confirmationErrorMessage: MutableLiveData<String> = MutableLiveData()
     val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
     val isValid:MutableLiveData<Boolean> = MutableLiveData()
-    var isCorrectPicture:MutableLiveData<Boolean> = MutableLiveData()
     private var isEmailValid: Boolean = false
     private var isPasswordValid: Boolean = false
     private var isConfirmationValid: Boolean = false
     private var isUsernameValid: Boolean = false
-    var authListener: AuthListener? = null
+    var signUpListener: SignUpListener? = null
 
 
 
@@ -45,7 +47,7 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
             emailErrorMessage.postValue(validationModel.message)
         })
         password.observe(lifecycleOwner, Observer {
-            val validationModel = it.validatePassword(context, confirmation.value)
+            val validationModel = it.validatePassword(context)
             isPasswordValid = validationModel.isValid
             validateInput(isEmailValid, isPasswordValid, isConfirmationValid, isUsernameValid)
             passwordErrorMessage.postValue(validationModel.message)
@@ -68,8 +70,14 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
         isValid.postValue(email&&password&&confirmation&&username)
     }
 
-    fun onSignUp(view: View) {
-        authListener?.onStarted()
+    fun onLoginText(view: View) {
+        Intent(view.context, LoginActivity::class.java).also {
+            view.context.startActivity(it)
+        }
+    }
+
+    fun onSignUpButton(view: View) {
+        signUpListener?.onStarted()
         Log.d(TAG, "onSubmitClick: ${email.value}")
         Log.d(TAG, "onSubmitClick: ${password.value}")
         Log.d(TAG, "onSubmitClick: ${confirmation.value}")
@@ -80,16 +88,18 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
                 val signUpResponse = repository.userSignUp(SignUpRequest(email.value, password.value, confirmation.value, username.value))
                 Log.d(TAG, "onSignUp: user is ${signUpResponse.user}")
                 signUpResponse.user?.let {
-                    authListener?.onSuccess(it)
+                    signUpListener?.onSuccess(it)
                     repository.saveUser(it)
                     return@main
                 }
                 Log.d(TAG, "onSignUp: response is ${signUpResponse.user?.username}")
                 signUpResponse.message?.let {
-                    authListener?.onFailure(it)
+                    signUpListener?.onFailure(it)
                 }
             } catch (e: ApiException) {
-                authListener?.onFailure(e.message!!)
+                signUpListener?.onFailure(e.message!!)
+            } catch (e: NoInternetException) {
+                signUpListener?.onFailure(e.message!!)
             }
             Log.d(TAG, "onSignUp: coroutines end")
         }

@@ -10,12 +10,12 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
 
 @Dao
 interface UserDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(user: User) : Long
 
-    @Insert()
-
     @Query("SELECT * FROM user WHERE uid = $CURRENT_USER_ID")
+
     fun getUser() : LiveData<User>
 
 
