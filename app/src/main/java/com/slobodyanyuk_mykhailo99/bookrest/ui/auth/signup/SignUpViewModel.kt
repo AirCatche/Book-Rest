@@ -13,6 +13,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
 import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
+import java.net.SocketTimeoutException
 
 class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
 
@@ -28,6 +29,7 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     val passwordErrorMessage: MutableLiveData<String> = MutableLiveData()
     val confirmationErrorMessage: MutableLiveData<String> = MutableLiveData()
     val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
+    val responseError = MutableLiveData<String>()
     val isValid:MutableLiveData<Boolean> = MutableLiveData()
     private var isEmailValid: Boolean = false
     private var isPasswordValid: Boolean = false
@@ -99,6 +101,8 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
             } catch (e: ApiException) {
                 signUpListener?.onFailure(e.message!!)
             } catch (e: NoInternetException) {
+                signUpListener?.onFailure(e.message!!)
+            } catch (e: SocketTimeoutException) {
                 signUpListener?.onFailure(e.message!!)
             }
             Log.d(TAG, "onSignUp: coroutines end")

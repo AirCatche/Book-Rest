@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BookRest</string>
+    <string name="app_name">Book Rest</string>
     <string name="logo">Logo</string>
     <string name="hint_email">Email Address</string>
     <string name="hint_password">Password</string>

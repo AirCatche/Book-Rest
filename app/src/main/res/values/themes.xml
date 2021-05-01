@@ -2,40 +2,42 @@
     <!-- Base application theme. -->
     <style name="Theme.BookRest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimary">@color/brown_300</item>
+        <item name="colorPrimaryVariant">@color/brown_500</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/accent</item>
-        <item name="colorSecondaryVariant">@color/accent_dark</item>
-        <item name="colorOnSecondary">@color/on_accent</item>
+        <item name="colorSecondary">@color/lime_300</item>
+        <item name="colorSecondaryVariant">@color/lime_500</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="colorError">@color/accent</item>
-        <item name="android:colorBackground">@color/primary_light</item>
-        <item name="colorOnBackground">@color/accent</item>
-        <item name="android:textColor">@color/icons</item>
-        <item name="android:color">@color/primary_dark</item>
-        <item name="android:navigationBarColor">@color/primary_light</item>
-        <item name="navigationIconTint">@color/accent</item>
+        <!-- Theme customization -->
+        <item name="colorError">?attr/colorSecondaryVariant</item>
+        <item name="android:colorBackground">@color/brown_100</item>
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+        <item name="navigationIconTint">?attr/colorSecondaryVariant</item>
     </style>
+
+    <style name="Theme.BookRestSophisticated" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/beige</item>
+        <item name="colorPrimaryVariant">@color/dark_beige</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/pink</item>
+        <item name="colorSecondaryVariant">@color/dark_pink</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Theme customization -->
+        <item name="colorError">?attr/colorSecondaryVariant</item>
+        <item name="android:colorBackground">@color/light_beige</item>
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+        <item name="navigationIconTint">?attr/colorSecondaryVariant</item>
+    </style>
+
+
 </resources>
 
 
 
-
-<!--<style name="Theme.BookRest" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
-<!--&lt;!&ndash; Primary brand color. &ndash;&gt;-->
-<!--<item name="colorPrimary">@color/purple_200</item>-->
-<!--<item name="colorPrimaryVariant">@color/purple_700</item>-->
-<!--<item name="colorOnPrimary">@color/black</item>-->
-<!--&lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--<item name="colorSecondary">@color/teal_200</item>-->
-<!--<item name="colorSecondaryVariant">@color/teal_200</item>-->
-<!--<item name="colorOnSecondary">@color/black</item>-->
-<!--&lt;!&ndash; Status bar color. &ndash;&gt;-->
-<!--<item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
-<!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-
-<!--</style>-->

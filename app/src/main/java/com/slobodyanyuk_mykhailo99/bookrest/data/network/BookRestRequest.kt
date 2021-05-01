@@ -21,8 +21,7 @@ abstract class BookRestRequest {
                 } catch (e: JSONException) { }
                 errorMessage.append("\n")
             }
-            errorMessage.append("Error code: ${response.code()}")
-
+//            errorMessage.append("Error code: ${response.code()}")
             throw ApiException(errorMessage.toString())
         }
     }

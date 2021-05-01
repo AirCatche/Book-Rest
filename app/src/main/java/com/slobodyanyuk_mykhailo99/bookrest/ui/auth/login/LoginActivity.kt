@@ -33,14 +33,6 @@ class LoginActivity : AppCompatActivity(), LoginListener, KodeinAware {
         binding.viewmodel = loginViewModel
         loginViewModel.loginListener = this
 
-        loginViewModel.getLoggedInUser().observe(this, Observer { user ->
-            if (user != null) {
-                Intent(this, HomeActivity::class.java).also {
-                    it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(it)
-                }
-            }
-        })
     }
     override fun onStart() {
         super.onStart()
@@ -52,11 +44,16 @@ class LoginActivity : AppCompatActivity(), LoginListener, KodeinAware {
 
     override fun onSuccess(token: String) {
         Log.d(TAG, "onSuccess: starts")
-        Log.d(TAG, "onSuccess: $token sign up now")
+        Log.d(TAG, "onSuccess: token is: $token")
+        Intent(this, HomeActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(it)
+        }
     }
 
     override fun onFailure(message: String) {
         Log.d(TAG, "onFailure: starts with message ---> $message")
+        loginViewModel.responseError.postValue(message)
     }
 
 }

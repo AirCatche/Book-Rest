@@ -12,8 +12,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BookRest">
-        <activity android:name=".ui.auth.login.LoginActivity">
+        android:theme="@style/Theme.BookRestSophisticated">
+        <activity
+            android:name=".ui.auth.login.LoginActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            >
 
         </activity>
 

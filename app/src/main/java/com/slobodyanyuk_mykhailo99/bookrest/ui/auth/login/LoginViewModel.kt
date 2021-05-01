@@ -1,5 +1,4 @@
 package com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login
-
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -13,6 +12,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
 import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
+import java.net.SocketTimeoutException
 
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
@@ -21,20 +21,15 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
     }
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
-
+    val responseError = MutableLiveData<String>()
     val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
     val passwordErrorMessage: MutableLiveData<String> = MutableLiveData()
+    val isValid: MutableLiveData<Boolean> = MutableLiveData()
 
-
-    val isValid:MutableLiveData<Boolean> = MutableLiveData()
-//    var isCorrectPicture:MutableLiveData<Boolean> = MutableLiveData()
-//    private var isEmailValid: Boolean = false
-        private var isUsernameValid: Boolean = false
-        private var isPasswordValid: Boolean = false
-//    private var isConfirmationValid: Boolean = false
+    private var isUsernameValid: Boolean = false
+    private var isPasswordValid: Boolean = false
     var loginListener: LoginListener? = null
-
-    fun getLoggedInUser() = repository.getUser()
+   // fun getLoggedInUser() = repository.getUser()
 
     fun setupInputObservers (lifecycleOwner: LifecycleOwner, context: Context) {
         username.observe(lifecycleOwner, Observer {
@@ -74,13 +69,14 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                     loginListener?.onSuccess(it)
                     return@main
                 }
-                Log.d(TAG, "onSignUp: response is ${loginResponse.token}")
                 loginResponse.message?.let {
                     loginListener?.onFailure(it)
                 }
             } catch (e: ApiException) {
                 loginListener?.onFailure(e.message!!)
             } catch (e:NoInternetException) {
+                loginListener?.onFailure(e.message!!)
+            } catch (e: SocketTimeoutException) {
                 loginListener?.onFailure(e.message!!)
             }
             Log.d(TAG, "onLogin: coroutines end")

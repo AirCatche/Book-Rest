@@ -6,71 +6,34 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFF</color>
-
-    <!--    logo colors-->
-    <color name="logo_stroke1">#3F51B5</color>
-    <color name="logo_filled1">#f06292</color>
-    <!--    first theme colors-->
-    <color name="primary_lighter1">#e8eaf6</color>
-    <color name="primary_light1">#7986cb</color>
-    <color name="primary1">#3F51B5</color>
-    <color name="primary_dark1">#303F9F</color>
-    <color name="on_primary1">#FFFFFF</color>
-
-    <color name="accent_light1">#f06292</color>
-    <color name="accent1">#e91e63</color>
-    <color name="accent_dark1">#FF4081</color>
-    <color name="on_accent1">#FFFFFF</color>>
-    <color name="accent_transparent1">#40FF4081</color>
-
-    <color name="primary_text1">#FFFFFF</color>
-    <color name="secondary_text1">#004D40</color>
-    <color name="icons1">#FFFFFF</color>
-
-    <!--    second theme colors-->
-    <!--    second logo colors-->
-
-    <color name="logo_stroke">#AFB42B</color>
-    <color name="logo_filled">#0097a7</color>
-
-    <!--    second theme colors-->
-    <color name="primary_lighter">#b2ebf2</color>
-    <color name="primary_light">#4dd0e1</color>
-    <color name="primary">#00BCD4</color>
-    <color name="primary_dark">#0097a7</color>
-    <color name="on_primary">#FFFFFF</color>
-    <color name="primary_transparent">#4000BCD4</color>
 
 
-    <color name="accent_lighter">#f0f4c3</color>
-    <color name="accent_light">#F0F4C3</color>
-    <color name="accent">#CDDC39</color>
-    <color name="accent_dark">#AFB42B</color>
-    <color name="on_accent">#FFFFFF</color>>
-    <color name="accent_transparent">#40CDDC39</color>
-
-    <color name="primary_text">#FFFFFF</color>
-    <color name="secondary_text">#004D40</color>
-    <color name="icons">#FFFFFF</color>
-
-    <color name="primary_m">#b2ebf2</color>
-    <color name="primary_variant">#4dd0e1</color>
-    <color name="on_primary_m"></color>
-
-    <color name="secondary">#0097a7</color>
-    <color name="secondary_variant">#FFFFFF</color>
-    <color name="on_secondary">#4000BCD4</color>
-
-    <color name="background">#f0f4c3</color>
-    <color name="surface">#F0F4C3</color>
-    <color name="error">#CDDC39</color>
-    <color name="on_background">#AFB42B</color>
-    <color name="on_surface">#FFFFFF</color>>
-    <color name="on_error">#40CDDC39</color>
+    <color name="lime_50">#F9FBE7</color>
+    <color name="lime_100">#F0F4C3</color>
+    <color name="lime_300">#DCE775</color>
+    <color name="lime_500">#CDDC39</color>
+    <color name="lime_700">#AFB42B</color>
 
 
+    <color name="brown_200">#BCAAA4</color>
+    <color name="brown_100">#D7CCC8</color>
+    <color name="brown_300">#A1887F</color>
+    <color name="brown_50">#EFEBE9</color>
+    <color name="brown_500">#795548</color>
+    <color name="brown_700">#5D4037</color>
 
+    <color name="light_green_500">#8bc34a</color>
+    <color name="light_green_200">#c5e1a5</color>
+    <color name="light_green_700">#689f38</color>
 
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="light_beige">#fffff1</color>
+    <color name="beige">#e4dbbe</color>
+    <color name="dark_beige">#b2a98e</color>
+    <color name="light_pink">#ff979b</color>
+    <color name="pink">#f4656d</color>
+    <color name="dark_pink">#bc3242</color>
 </resources>
 
