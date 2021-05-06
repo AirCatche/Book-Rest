@@ -2,71 +2,99 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewmodel"
             type="com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpViewModel" />
 
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.auth.LoadingActivity">
+        tools:context=".ui.auth.LoadingActivity"
+        android:background="@drawable/auth_input_background"
+        >
 
         <ImageView
-            android:id="@+id/iv_load_pic"
+            android:id="@+id/iv_sign_up_logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/logo"
-            android:src="@drawable/ic_logo2"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            android:src="@drawable/ic_logo_8_chair"
+            app:layout_constraintBottom_toTopOf="@+id/tv_sign_up_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHeight_percent=".25"
+            />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/tv_sign_up_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_sign_up_logo" />
+
+        <LinearLayout
+            android:id="@+id/linear_sign_up_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
             android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_load_pic">
+            app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_header">
+
+            <TextView
+                android:id="@+id/tv_sign_up_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/login_welcome_message"
+                android:textAlignment="center"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="24sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/hint_email"
-                android:textColorHint="?attr/colorPrimary"
+                android:textColorHint="?attr/hintTextColor"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:errorText="@{viewmodel.emailErrorMessage}"
+                app:errorTextColor="?attr/colorError"
                 app:helperText="*">
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:autofillHints="email"
-                    android:background="@drawable/login_et_input"
-                    android:drawableStart="@drawable/ic_email_custom"
+                    android:layout_height="50dp"
+                    android:autofillHints="something"
+                    android:background="@drawable/auth_et_input"
+                    android:drawableStart="@drawable/auth_email_custom"
                     android:drawablePadding="12dp"
                     android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textNoSuggestions"
                     android:text="@={viewmodel.email}"
-                    android:textColor="?attr/colorPrimaryDark"
+                    android:textColor="?attr/colorPrimaryVariant"
                     tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -75,25 +103,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
-                android:textColorHint="?attr/colorPrimary"
+                android:textColorHint="?attr/hintTextColor"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:errorText="@{viewmodel.passwordErrorMessage}"
+                app:errorTextColor="?attr/colorError"
                 app:helperText="*"
                 app:passwordToggleEnabled="true">
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
 
                     android:autofillHints="password"
-                    android:background="@drawable/login_et_input"
-                    android:drawableStart="@drawable/ic_lock_custom"
+                    android:background="@drawable/auth_et_input"
+                    android:drawableStart="@drawable/auth_lock_custom"
                     android:drawablePadding="12dp"
                     android:inputType="textPassword"
                     android:text="@={viewmodel.password}"
-                    android:textColor="?attr/colorPrimaryDark"
+                    android:textColor="?attr/colorPrimaryVariant"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,23 +130,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_confirm"
-                android:textColorHint="?attr/colorPrimary"
+                android:textColorHint="?attr/hintTextColor"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:errorText="@{viewmodel.confirmationErrorMessage}"
+                app:errorTextColor="?attr/colorError"
                 app:helperText="*">
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:autofillHints="password"
-                    android:background="@drawable/login_et_input"
-                    android:drawableStart="@drawable/ic_lock_custom"
+                    android:background="@drawable/auth_et_input"
+                    android:drawableStart="@drawable/auth_lock_custom"
                     android:drawablePadding="12dp"
                     android:inputType="textPassword"
                     android:text="@={viewmodel.confirmation}"
-                    android:textColor="?attr/colorPrimaryDark"
+                    android:textColor="?attr/colorPrimaryVariant"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,23 +155,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_username"
-                android:textColorHint="?attr/colorPrimary"
+                android:textColorHint="?attr/hintTextColor"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:errorText="@{viewmodel.usernameErrorMessage}"
+                app:errorTextColor="?attr/colorError"
                 app:helperText="*">
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:autofillHints="username"
-                    android:background="@drawable/login_et_input"
-                    android:drawableStart="@drawable/ic_person_custom"
+                    android:background="@drawable/auth_et_input"
+                    android:drawableStart="@drawable/auth_person_custom"
                     android:drawablePadding="12dp"
                     android:inputType="textNoSuggestions"
                     android:text="@={viewmodel.username}"
-                    android:textColor="?attr/colorPrimaryDark"
+                    android:textColor="?attr/colorPrimaryVariant"
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,12 +182,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:drawablePadding="8dp"
-                android:text="@={viewmodel.responseError}"
                 android:gravity="center"
+                android:text="@={viewmodel.responseError}"
                 android:textColor="?attr/colorSecondary"
                 android:textSize="14sp"
                 android:visibility="@{viewmodel.responseError !=null ? View.VISIBLE : View.GONE}"
                 app:drawableStartCompat="@drawable/ic_baseline_error_24" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
                 android:layout_width="192dp"
@@ -166,25 +198,54 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/login_submit_button"
                 android:enabled="@{viewmodel.isValid()}"
-
+                android:onClick="@{viewmodel::onSignUpButton}"
                 android:text="@string/submit"
                 android:textColor="?attr/colorOnSecondary"
-                android:textSize="14sp"
-                android:onClick="@{viewmodel::onSignUpButton}" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_login"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/login_log_in"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="18sp"
-                android:onClick="@{viewmodel::onLoginText}"/>
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/tv_login_message"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:onClick="@{viewmodel::onLoginText}"
+                    android:text="@string/tv_login_log_in"
+                    android:textColor="?attr/colorSecondaryVariant"
+                    android:textSize="18sp" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/iv_load_pic"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:adjustViewBounds="true"-->
+    <!--            android:contentDescription="@string/logo"-->
+    <!--            android:src="@drawable/ic_logo_8_chair"-->
+    <!--            app:layout_constraintBottom_toTopOf="@+id/linearLayout"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHeight_default="percent"-->
+    <!--            app:layout_constraintHeight_percent=".15"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintWidth_default="percent"-->
+    <!--            app:layout_constraintWidth_percent=".30" />-->

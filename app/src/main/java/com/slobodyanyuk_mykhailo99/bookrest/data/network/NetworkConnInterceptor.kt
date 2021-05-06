@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import com.slobodyanyuk_mykhailo99.bookrest.util.Constants
 import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -12,7 +13,7 @@ class NetworkConnInterceptor(context: Context) : Interceptor {
     private val appContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isInternetAvailable()) {
-            throw NoInternetException("Make sure you have an active data connection")
+            throw NoInternetException(Constants.NO_INTERNET_CONNECTION)
         }
         return chain.proceed(chain.request())
     }
@@ -38,7 +39,6 @@ class NetworkConnInterceptor(context: Context) : Interceptor {
                         ConnectivityManager.TYPE_ETHERNET -> true
                         else -> false
                     }
-
                 }
             }
         }

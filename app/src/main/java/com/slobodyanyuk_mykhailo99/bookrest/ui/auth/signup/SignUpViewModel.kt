@@ -37,9 +37,7 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     private var isUsernameValid: Boolean = false
     var signUpListener: SignUpListener? = null
 
-
-
-    fun getLoggedInUser() = repository.getUser()
+//    fun getLoggedInUser() = repository.getUser()
 
     fun setupInputObservers (lifecycleOwner: LifecycleOwner, context: Context) {
         email.observe(lifecycleOwner, Observer {
@@ -91,7 +89,7 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
                 Log.d(TAG, "onSignUp: user is ${signUpResponse.user}")
                 signUpResponse.user?.let {
                     signUpListener?.onSuccess(it)
-                    repository.saveUser(it)
+//                    repository.saveUser(it)
                     return@main
                 }
                 Log.d(TAG, "onSignUp: response is ${signUpResponse.user?.username}")

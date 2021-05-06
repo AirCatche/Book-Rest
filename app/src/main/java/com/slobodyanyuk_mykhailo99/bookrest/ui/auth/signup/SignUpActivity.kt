@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.slobodyanyuk_mykhailo99.bookrest.R
 import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
 import com.slobodyanyuk_mykhailo99.bookrest.databinding.ActivitySignUpBinding
-import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
-import com.slobodyanyuk_mykhailo99.bookrest.ui.home.HomeActivity
 import org.kodein.di.android.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
@@ -36,13 +33,13 @@ class SignUpActivity : AppCompatActivity(), SignUpListener, KodeinAware {
         binding.viewmodel = signUpViewModel
         signUpViewModel.signUpListener = this
 
-        signUpViewModel.getLoggedInUser().observe(this, Observer { user ->
-            if (user != null) {
-                Intent(this, LoginActivity::class.java).also {
-                    startActivity(it)
-                }
-            }
-        })
+//        signUpViewModel.getLoggedInUser().observe(this, Observer { user ->
+//            if (user != null) {
+//                Intent(this, LoginActivity::class.java).also {
+//                    startActivity(it)
+//                }
+//            }
+//        })
 
     }
     override fun onStart() {
@@ -56,6 +53,10 @@ class SignUpActivity : AppCompatActivity(), SignUpListener, KodeinAware {
     override fun onSuccess(user: User) {
         Log.d(TAG, "onSuccess: starts")
         Log.d(TAG, "onSuccess: ${user.username} sign up now")
+        Intent(this, SignUpActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(it)
+        }
     }
 
     override fun onFailure(message: String) {

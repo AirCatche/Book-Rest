@@ -31,11 +31,19 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Theme customization -->
         <item name="colorError">?attr/colorSecondaryVariant</item>
+        <item name="colorOnError">@color/white</item>
         <item name="android:colorBackground">@color/light_beige</item>
+        <item name="colorSurface">@color/lighter_beige</item>
         <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
         <item name="navigationIconTint">?attr/colorSecondaryVariant</item>
+        <item name="hintTextColor">?attr/colorPrimary</item>
+        <item name="fontFamily">@font/regular_unica_one</item>
     </style>
 
+    <style name="DialogSliding">
+        <item name="android:windowEnterAnimation">@anim/anim_slide_down</item>
+        <item name="android:windowExitAnimation">@anim/anim_slide_up</item>
+    </style>
 
 </resources>
 

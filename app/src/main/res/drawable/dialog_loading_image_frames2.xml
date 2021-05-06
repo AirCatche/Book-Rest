@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/ic_frame_1_solo_filled_chair"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ic_frame_2_solo_filled_chair"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ic_frame_3_solo_filled_chair"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ic_frame_4_solo_filled_chair"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/ic_frame_5_solo_filled_chair"
+        android:duration="50" />
+</animation-list>

@@ -16,19 +16,15 @@ import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
 
-class MVVMApplication: Application(), KodeinAware {
+class BookRestApplication: Application(), KodeinAware {
     override val kodein: Kodein = Kodein.lazy {
-        import(androidXModule(this@MVVMApplication))
-
+        import(androidXModule(this@BookRestApplication))
         bind() from singleton { NetworkConnInterceptor(instance()) }
         bind() from singleton { BookRestApi(instance()) }
         bind() from singleton { BookRestDatabase(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }
         bind() from provider { SignUpViewModelFactory(instance()) }
         bind() from provider { LoginViewModelFactory(instance()) }
-
-
-
     }
 
 }

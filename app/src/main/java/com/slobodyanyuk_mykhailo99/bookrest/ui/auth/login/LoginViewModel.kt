@@ -3,13 +3,14 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.*
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.LoginRequest
-
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
+import com.slobodyanyuk_mykhailo99.bookrest.util.Constants
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
 import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
 import java.net.SocketTimeoutException
@@ -63,8 +64,8 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
         Coroutines.main {
             Log.d(TAG, "onSubmitClick: starts coroutine")
             try {
-                val loginResponse = repository.userLogin(LoginRequest(username.value ,password.value ))
-                Log.d(TAG, "onLogin: user is ${loginResponse.username}")
+                val loginResponse = repository.userLogin(LoginRequest(username.value ,password.value))
+                Log.d(TAG, "onLogin: STATUS is ${loginResponse.verificationStatus}")
                 loginResponse.token?.let {
                     loginListener?.onSuccess(it)
                     return@main
@@ -77,7 +78,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
             } catch (e:NoInternetException) {
                 loginListener?.onFailure(e.message!!)
             } catch (e: SocketTimeoutException) {
-                loginListener?.onFailure(e.message!!)
+                loginListener?.onFailure(Constants.SERVER_IS_NOT_RESPONDING)
             }
             Log.d(TAG, "onLogin: coroutines end")
         }

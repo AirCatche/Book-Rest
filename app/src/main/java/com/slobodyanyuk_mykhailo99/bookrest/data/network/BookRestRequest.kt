@@ -19,7 +19,7 @@ abstract class BookRestRequest {
                 try {
                     errorMessage.append(JSONObject(it).getString("errorMessage"))
                 } catch (e: JSONException) { }
-                errorMessage.append("\n")
+               // errorMessage.append("\n")
             }
 //            errorMessage.append("Error code: ${response.code()}")
             throw ApiException(errorMessage.toString())

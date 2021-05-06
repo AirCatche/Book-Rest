@@ -1,14 +1,19 @@
 <resources>
-    <string name="app_name">Book Rest</string>
+    <string name="app_name">Bookrest</string>
     <string name="logo">Logo</string>
     <string name="hint_email">Email Address</string>
     <string name="hint_password">Password</string>
-    <string name="submit">Sign in</string>
+    <string name="submit">Sign up</string>
     <string name="hint_confirm">Confirm password</string>
-    <string name="login_forgot_password">Forgot Password?</string>
-    <string name="login_log_in">Already have profile? <u><i>Log in</i></u></string>
+    <string name="tv_login_forgot_password">Forgot Password?</string>
+    <string name="tv_login_message">Already have a profile?</string>
+    <string name="tv_login_log_in"><u><i>Log in</i></u></string>
     <string name="login_username">Username</string>
     <string name="login">Log in</string>
-    <string name="tv_login_no_profile_message">Do not have a profile?
-        <u><i>Sign Up Here</i></u></string>
+    <string name="tv_login_no_profile_message">Do not have a profile?</string>
+    <string name="tv_login_sign_up_message"><u><i>Sign Up Here</i></u></string>
+    <string name="loading">Loading ...</string>
+    <string name="loading_description">Loading</string>
+    <string name="welcome_back_message">Welcome back!Login to enter</string>
+    <string name="login_welcome_message">Welcome!Register to enter</string>
 </resources>

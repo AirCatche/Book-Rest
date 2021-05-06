@@ -16,6 +16,8 @@ data class User(
     var status: String? = null,
     var created: String? = null,
     var updated: String? = null,
+    var verified: String? = null,
+    var verificationTimesAsked: String? = null
 //    var roles : ArrayList<Role>? = null
     ) {
     @PrimaryKey(autoGenerate = false)
