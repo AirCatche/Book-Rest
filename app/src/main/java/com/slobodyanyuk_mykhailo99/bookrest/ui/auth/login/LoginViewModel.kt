@@ -3,16 +3,12 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.lifecycle.*
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.LoginRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpActivity
-import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
-import com.slobodyanyuk_mykhailo99.bookrest.util.Constants
-import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
-import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
+import com.slobodyanyuk_mykhailo99.bookrest.util.*
 import java.net.SocketTimeoutException
 
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
@@ -53,6 +49,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun onSignUpText(view: View) {
         Intent(view.context, SignUpActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             view.context.startActivity(it)
         }
     }
@@ -73,12 +70,12 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                 loginResponse.message?.let {
                     loginListener?.onFailure(it)
                 }
-            } catch (e: ApiException) {
-                loginListener?.onFailure(e.message!!)
-            } catch (e:NoInternetException) {
-                loginListener?.onFailure(e.message!!)
-            } catch (e: SocketTimeoutException) {
-                loginListener?.onFailure(Constants.SERVER_IS_NOT_RESPONDING)
+            } catch(e: NetworkException) {
+                when(e) {
+                    is NetworkException.ApiException -> {loginListener?.onFailure(e.message!!)}
+                    is NetworkException.NoInternetException -> {loginListener?.onFailure(e.message!!)}
+                    is NetworkException.NoRespondException -> {loginListener?.onFailure(e.message!!)}
+                }
             }
             Log.d(TAG, "onLogin: coroutines end")
         }

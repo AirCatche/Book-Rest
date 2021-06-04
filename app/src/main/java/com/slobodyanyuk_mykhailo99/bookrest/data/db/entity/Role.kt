@@ -2,7 +2,6 @@ package com.slobodyanyuk_mykhailo99.bookrest.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.slobodyanyuk_mykhailo99.bookrest.data.db.Users
 
 const val CURRENT_ROLE_ID = 0
 @Entity()

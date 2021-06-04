@@ -1,6 +1,6 @@
 package com.slobodyanyuk_mykhailo99.bookrest.data.network
 
-import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
+import com.slobodyanyuk_mykhailo99.bookrest.util.NetworkException
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
@@ -18,11 +18,11 @@ abstract class BookRestRequest {
             error?.let {
                 try {
                     errorMessage.append(JSONObject(it).getString("errorMessage"))
-                } catch (e: JSONException) { }
+                } catch (ignored: JSONException) { }
                // errorMessage.append("\n")
             }
 //            errorMessage.append("Error code: ${response.code()}")
-            throw ApiException(errorMessage.toString())
+            throw NetworkException.ApiException(errorMessage.toString())
         }
     }
 

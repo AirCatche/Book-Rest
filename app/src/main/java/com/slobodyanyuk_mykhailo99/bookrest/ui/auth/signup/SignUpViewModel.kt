@@ -10,9 +10,8 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
-import com.slobodyanyuk_mykhailo99.bookrest.util.ApiException
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
-import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
+import com.slobodyanyuk_mykhailo99.bookrest.util.NetworkException
 import java.net.SocketTimeoutException
 
 class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
@@ -30,7 +29,7 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     val confirmationErrorMessage: MutableLiveData<String> = MutableLiveData()
     val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
     val responseError = MutableLiveData<String>()
-    val isValid:MutableLiveData<Boolean> = MutableLiveData()
+    val isValid: MutableLiveData<Boolean> = MutableLiveData()
     private var isEmailValid: Boolean = false
     private var isPasswordValid: Boolean = false
     private var isConfirmationValid: Boolean = false
@@ -72,16 +71,13 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun onLoginText(view: View) {
         Intent(view.context, LoginActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             view.context.startActivity(it)
         }
     }
 
     fun onSignUpButton(view: View) {
         signUpListener?.onStarted()
-        Log.d(TAG, "onSubmitClick: ${email.value}")
-        Log.d(TAG, "onSubmitClick: ${password.value}")
-        Log.d(TAG, "onSubmitClick: ${confirmation.value}")
-        Log.d(TAG, "onSubmitClick: ${username.value}")
         Coroutines.main {
             Log.d(TAG, "onSubmitClick: starts coroutine")
             try {
@@ -96,12 +92,12 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
                 signUpResponse.message?.let {
                     signUpListener?.onFailure(it)
                 }
-            } catch (e: ApiException) {
-                signUpListener?.onFailure(e.message!!)
-            } catch (e: NoInternetException) {
-                signUpListener?.onFailure(e.message!!)
-            } catch (e: SocketTimeoutException) {
-                signUpListener?.onFailure(e.message!!)
+            } catch(e: NetworkException) {
+                when(e) {
+                    is NetworkException.ApiException -> {signUpListener?.onFailure(e.message!!)}
+                    is NetworkException.NoInternetException -> {signUpListener?.onFailure(e.message!!)}
+                    is NetworkException.NoRespondException -> {signUpListener?.onFailure(e.message!!)}
+                }
             }
             Log.d(TAG, "onSignUp: coroutines end")
         }

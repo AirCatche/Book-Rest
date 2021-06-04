@@ -5,15 +5,15 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.slobodyanyuk_mykhailo99.bookrest.util.Constants
-import com.slobodyanyuk_mykhailo99.bookrest.util.NoInternetException
+import com.slobodyanyuk_mykhailo99.bookrest.util.NetworkException
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class NetworkConnInterceptor(context: Context) : Interceptor {
+class ConnectionInterceptor(context: Context) : Interceptor {
     private val appContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isInternetAvailable()) {
-            throw NoInternetException(Constants.NO_INTERNET_CONNECTION)
+            throw NetworkException.NoInternetException(Constants.NO_INTERNET_CONNECTION)
         }
         return chain.proceed(chain.request())
     }
@@ -42,7 +42,6 @@ class NetworkConnInterceptor(context: Context) : Interceptor {
                 }
             }
         }
-
         return result
     }
 }

@@ -5,12 +5,10 @@ import android.content.Context
 import androidx.room.RoomDatabase;
 import androidx.room.Database;
 import androidx.room.Room
-import androidx.room.TypeConverters
 import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.Role
 import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
 
 @Database(entities = [User::class,Role::class], version = 1, exportSchema = false)
-@TypeConverters(RoleConverter::class, UserConverter::class)
 abstract class BookRestDatabase : RoomDatabase() {
     abstract fun getUserDao(): UserDao
     companion object {
