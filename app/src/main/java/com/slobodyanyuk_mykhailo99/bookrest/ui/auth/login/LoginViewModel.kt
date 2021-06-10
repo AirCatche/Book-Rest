@@ -76,6 +76,8 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                     is NetworkException.NoInternetException -> {loginListener?.onFailure(e.message!!)}
                     is NetworkException.NoRespondException -> {loginListener?.onFailure(e.message!!)}
                 }
+            } catch (e: SocketTimeoutException) {
+                loginListener?.onFailure(e.message!!)
             }
             Log.d(TAG, "onLogin: coroutines end")
         }

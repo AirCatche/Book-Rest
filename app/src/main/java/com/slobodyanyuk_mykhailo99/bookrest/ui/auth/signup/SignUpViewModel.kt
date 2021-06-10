@@ -98,6 +98,8 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
                     is NetworkException.NoInternetException -> {signUpListener?.onFailure(e.message!!)}
                     is NetworkException.NoRespondException -> {signUpListener?.onFailure(e.message!!)}
                 }
+            } catch (e: SocketTimeoutException) {
+                signUpListener?.onFailure(e.message!!)
             }
             Log.d(TAG, "onSignUp: coroutines end")
         }
