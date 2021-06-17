@@ -48,10 +48,11 @@ class LoginActivity : AppCompatActivity(), LoginListener, KodeinAware {
         Log.d(TAG, "onSuccess: starts")
         dialogLoading.dismissDialog()
         Log.d(TAG, "onSuccess: token is: $token")
-        Intent(this, HomeActivity::class.java).also {
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(it)
-        }
+
+//        Intent(this, HomeActivity::class.java).also {
+//            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            startActivity(it)
+//        }
     }
 
     override fun onFailure(message: String) {
