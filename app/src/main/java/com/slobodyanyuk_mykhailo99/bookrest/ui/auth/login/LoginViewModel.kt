@@ -16,6 +16,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
     companion object {
         private const val TAG = "AuthViewModel"
     }
+
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     val responseError = MutableLiveData<String>()

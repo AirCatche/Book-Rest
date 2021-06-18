@@ -9,9 +9,3 @@ sealed class NetworkException(message: String): IOException(message) {
     class NoRespondException (message: String): NetworkException(message)
 }
 
-
-
-
-//class ApiException(message: String) : IOException(message)
-//class NoInternetException(message: String) : IOException(message)
-//class NoResponseException(message: String) : SocketTimeoutException(message)
