@@ -183,10 +183,10 @@
                 android:layout_marginTop="8dp"
                 android:drawablePadding="8dp"
                 android:gravity="center"
-                android:text="@={viewmodel.responseError}"
+                android:text="@={viewmodel.responseErrorMessage}"
                 android:textColor="?attr/colorSecondary"
                 android:textSize="14sp"
-                android:visibility="@{viewmodel.responseError !=null ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewmodel.responseErrorMessage !=null ? View.VISIBLE : View.GONE}"
                 app:drawableStartCompat="@drawable/ic_baseline_error_24" />
 
             <androidx.appcompat.widget.AppCompatButton
