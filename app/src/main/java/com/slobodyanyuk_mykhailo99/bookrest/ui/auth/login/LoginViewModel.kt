@@ -13,20 +13,54 @@ import java.net.SocketTimeoutException
 
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
-    companion object {
-        private const val TAG = "AuthViewModel"
-    }
-    val username = MutableLiveData<String>()
-    val password = MutableLiveData<String>()
-    val responseError = MutableLiveData<String>()
+    lateinit var loginListener: LoginListener
+
+    val username: MutableLiveData<String> = MutableLiveData()
+    val password: MutableLiveData<String> = MutableLiveData()
+
     val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
     val passwordErrorMessage: MutableLiveData<String> = MutableLiveData()
-    val isValid: MutableLiveData<Boolean> = MutableLiveData()
+    val responseError: MutableLiveData<String> = MutableLiveData()
 
     private var isUsernameValid: Boolean = false
     private var isPasswordValid: Boolean = false
-    var loginListener: LoginListener? = null
-   // fun getLoggedInUser() = repository.getUser()
+    private val isValid: MutableLiveData<Boolean> = MutableLiveData()
+
+    fun onSignUpText(view: View) {
+        Intent(view.context, SignUpActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            view.context.startActivity(it)
+        }
+    }
+
+    fun onLoginButton(view: View) {     //??????
+        loginListener.onStarted()
+        Log.d(TAG, "onSubmitClick: ${username.value}")
+        Log.d(TAG, "onSubmitClick: ${password.value}")
+        Coroutines.main {
+            Log.d(TAG, "onSubmitClick: starts coroutine")
+            try {
+                val loginResponse = repository.userLogin(LoginRequest(username.value ,password.value))
+                Log.d(TAG, "onLogin: STATUS is ${loginResponse.verificationStatus}")
+                loginResponse.token?.let {
+                    loginListener.onSuccess(it)
+                    return@main
+                }
+                loginResponse.message?.let {
+                    loginListener.onFailure(it)
+                }
+            } catch(e: NetworkException) {
+                when(e) {
+                    is NetworkException.ApiException -> {loginListener.onFailure(e.message!!)}
+                    is NetworkException.NoInternetException -> {loginListener.onFailure(e.message!!)}
+                    is NetworkException.NoRespondException -> {loginListener.onFailure(e.message!!)}
+                }
+            } catch (e: SocketTimeoutException) {
+                loginListener.onFailure(e.message!!)
+            }
+            Log.d(TAG, "onLogin: coroutines end")
+        }
+    }
 
     fun setupInputObservers (lifecycleOwner: LifecycleOwner, context: Context) {
         username.observe(lifecycleOwner, Observer {
@@ -47,37 +81,8 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
         isValid.postValue(password&&username)
     }
 
-    fun onSignUpText(view: View) {
-        Intent(view.context, SignUpActivity::class.java).also {
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            view.context.startActivity(it)
-        }
+    companion object {
+        private const val TAG = "AuthViewModel"
     }
 
-    fun onLoginButton(view: View) {
-        loginListener?.onStarted()
-        Log.d(TAG, "onSubmitClick: ${username.value}")
-        Log.d(TAG, "onSubmitClick: ${password.value}")
-        Coroutines.main {
-            Log.d(TAG, "onSubmitClick: starts coroutine")
-            try {
-                val loginResponse = repository.userLogin(LoginRequest(username.value ,password.value))
-                Log.d(TAG, "onLogin: STATUS is ${loginResponse.verificationStatus}")
-                loginResponse.token?.let {
-                    loginListener?.onSuccess(it)
-                    return@main
-                }
-                loginResponse.message?.let {
-                    loginListener?.onFailure(it)
-                }
-            } catch(e: NetworkException) {
-                when(e) {
-                    is NetworkException.ApiException -> {loginListener?.onFailure(e.message!!)}
-                    is NetworkException.NoInternetException -> {loginListener?.onFailure(e.message!!)}
-                    is NetworkException.NoRespondException -> {loginListener?.onFailure(e.message!!)}
-                }
-            }
-            Log.d(TAG, "onLogin: coroutines end")
-        }
-    }
 }

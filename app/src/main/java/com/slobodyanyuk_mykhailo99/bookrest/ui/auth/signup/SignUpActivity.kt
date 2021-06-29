@@ -61,7 +61,7 @@ class SignUpActivity : AppCompatActivity(), SignUpListener, KodeinAware {
 
     override fun onFailure(message: String) {
         Log.d(TAG, "onFailure: starts with message ---> $message")
-        signUpViewModel.responseError.value = message
+        signUpViewModel.responseErrorMessage.value = message
     }
 
 }
