@@ -8,8 +8,11 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestApi
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.LoginResponse
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.SignUpResponse
+import com.slobodyanyuk_mykhailo99.bookrest.preference.PreferenceProvider
 
-class UserRepository(private val api: BookRestApi, private val db: BookRestDatabase): BookRestRequest() {
+class UserRepository(private val api: BookRestApi,
+                     private val db: BookRestDatabase,
+                     private val preferences: PreferenceProvider): BookRestRequest() {
 
     suspend fun userLogin(loginRequest: LoginRequest) : LoginResponse {
         return apiRequest {
@@ -21,6 +24,7 @@ class UserRepository(private val api: BookRestApi, private val db: BookRestDatab
             api.userSignUp(signUpRequest)
         }
     }
+
 
     suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
 
