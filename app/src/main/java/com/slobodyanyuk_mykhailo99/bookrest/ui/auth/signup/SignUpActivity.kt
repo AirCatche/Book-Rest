@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.slobodyanyuk_mykhailo99.bookrest.R
 import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
 import com.slobodyanyuk_mykhailo99.bookrest.databinding.ActivitySignUpBinding
+import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
 import org.kodein.di.android.kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
@@ -20,9 +21,6 @@ class SignUpActivity : AppCompatActivity(), SignUpListener, KodeinAware {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var signUpViewModel: SignUpViewModel
-    companion object {
-        private const val TAG = "SignUpActivity"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,7 @@ class SignUpActivity : AppCompatActivity(), SignUpListener, KodeinAware {
     override fun onSuccess(user: User) {
         Log.d(TAG, "onSuccess: starts")
         Log.d(TAG, "onSuccess: ${user.username} sign up now")
-        Intent(this, SignUpActivity::class.java).also {
+        Intent(this, LoginActivity::class.java).also {
             it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(it)
         }
@@ -64,4 +62,7 @@ class SignUpActivity : AppCompatActivity(), SignUpListener, KodeinAware {
         signUpViewModel.responseErrorMessage.value = message
     }
 
+    companion object {
+        private const val TAG = "SignUpActivity"
+    }
 }

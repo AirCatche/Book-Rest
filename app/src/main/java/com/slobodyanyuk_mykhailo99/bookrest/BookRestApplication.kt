@@ -1,6 +1,7 @@
 package com.slobodyanyuk_mykhailo99.bookrest
 
 import android.app.Application
+
 import com.slobodyanyuk_mykhailo99.bookrest.data.db.BookRestDatabase
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestApi
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.ConnectionInterceptor
@@ -16,9 +17,11 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
-
 class BookRestApplication: Application(), KodeinAware {
+
+    //val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
     override val kodein: Kodein = Kodein.lazy {
+
         import(androidXModule(this@BookRestApplication))
         bind() from singleton { ConnectionInterceptor(instance()) }
         bind() from singleton { BookRestApi(instance()) }
@@ -26,7 +29,9 @@ class BookRestApplication: Application(), KodeinAware {
         bind() from singleton { PreferenceProvider(instance()) }
         bind() from singleton { UserRepository(instance(), instance(), instance()) }
         bind() from provider { SignUpViewModelFactory(instance()) }
-        bind() from provider { LoginViewModelFactory(instance()) }
+        bind() from provider { LoginViewModelFactory(instance(), instance()) }
+
     }
+
 
 }

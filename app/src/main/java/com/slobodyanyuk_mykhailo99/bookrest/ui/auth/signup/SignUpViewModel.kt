@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
+import com.slobodyanyuk_mykhailo99.bookrest.preference.PreferenceProvider
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
@@ -16,6 +17,7 @@ import java.net.SocketTimeoutException
 
 class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
 
+    lateinit var preferenceProvider: PreferenceProvider
     lateinit var signUpListener: SignUpListener
 
     val email: MutableLiveData<String> = MutableLiveData()
@@ -33,7 +35,7 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     private var isPasswordValid: Boolean = false
     private var isConfirmationValid: Boolean = false
     private var isUsernameValid: Boolean = false
-    private val isValid: MutableLiveData<Boolean> = MutableLiveData()
+    val isValid: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onLoginText(view: View) {
         Intent(view.context, LoginActivity::class.java).also {

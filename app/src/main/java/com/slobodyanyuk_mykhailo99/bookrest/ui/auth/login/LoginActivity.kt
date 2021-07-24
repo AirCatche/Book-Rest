@@ -21,9 +21,6 @@ class LoginActivity : AppCompatActivity(), LoginListener, KodeinAware {
     private lateinit var dialogLoading: DialogLoading
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
-    companion object {
-        private const val TAG = "LoginActivity"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,16 +46,20 @@ class LoginActivity : AppCompatActivity(), LoginListener, KodeinAware {
         dialogLoading.dismissDialog()
         Log.d(TAG, "onSuccess: token is: $token")
 
-//        Intent(this, HomeActivity::class.java).also {
-//            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(it)
-//        }
+        Intent(this, HomeActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(it)
+        }
     }
 
     override fun onFailure(message: String) {
         Log.d(TAG, "onFailure: starts with message ---> $message")
         dialogLoading.dismissDialog()
         loginViewModel.responseError.postValue(message)
+    }
+
+    companion object {
+        private const val TAG = "LoginActivity"
     }
 
 }

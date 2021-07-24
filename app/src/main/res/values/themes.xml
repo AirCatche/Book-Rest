@@ -28,7 +28,7 @@
         <item name="colorSecondaryVariant">@color/dark_pink</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>>
         <!-- Theme customization -->
         <item name="colorError">?attr/colorSecondaryVariant</item>
         <item name="colorOnError">@color/white</item>

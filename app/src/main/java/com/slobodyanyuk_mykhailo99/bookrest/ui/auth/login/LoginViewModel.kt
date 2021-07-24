@@ -1,4 +1,5 @@
 package com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login
+
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -6,12 +7,13 @@ import android.view.View
 import androidx.lifecycle.*
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.LoginRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
+import com.slobodyanyuk_mykhailo99.bookrest.preference.PreferenceProvider
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.*
 import java.net.SocketTimeoutException
 
-class LoginViewModel(private val repository: UserRepository) : ViewModel() {
+class LoginViewModel(private val repository: UserRepository, private val preferenceProvider: PreferenceProvider) : ViewModel() {
 
     lateinit var loginListener: LoginListener
 
@@ -24,7 +26,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
 
     private var isUsernameValid: Boolean = false
     private var isPasswordValid: Boolean = false
-    private val isValid: MutableLiveData<Boolean> = MutableLiveData()
+    val isValid: MutableLiveData<Boolean> = MutableLiveData()
 
     fun onSignUpText(view: View) {
         Intent(view.context, SignUpActivity::class.java).also {
@@ -44,6 +46,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                 Log.d(TAG, "onLogin: STATUS is ${loginResponse.verificationStatus}")
                 loginResponse.token?.let {
                     loginListener.onSuccess(it)
+                    preferenceProvider.saveToken(it)
                     return@main
                 }
                 loginResponse.message?.let {
@@ -51,9 +54,13 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                 }
             } catch(e: NetworkException) {
                 when(e) {
+
                     is NetworkException.ApiException -> {loginListener.onFailure(e.message!!)}
+
                     is NetworkException.NoInternetException -> {loginListener.onFailure(e.message!!)}
+
                     is NetworkException.NoRespondException -> {loginListener.onFailure(e.message!!)}
+
                 }
             } catch (e: SocketTimeoutException) {
                 loginListener.onFailure(e.message!!)
@@ -80,6 +87,8 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
     private fun validateInput(username:Boolean, password:Boolean) {
         isValid.postValue(password&&username)
     }
+
+
 
     companion object {
         private const val TAG = "AuthViewModel"
