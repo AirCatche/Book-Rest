@@ -22,5 +22,12 @@
     <string name="menu_item_profile">restaurants</string>
     <string name="menu_item_settings">Settings</string>
     <string name="menu_item_help">help</string>
+    <string name="test_date">Wednesday, 14 May</string>
+    <string name="test_greeting">Welcome, Volodya</string>
+    <string name="tab_item_liked">Liked</string>
+    <string name="tab_item_nearby">Nearby</string>
+    <string name="tab_item_famous">Famous</string>
+    <string name="tab_item_all">All</string>
+    <string name="content_description_profile_image">profile image</string>
 
 </resources>

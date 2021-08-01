@@ -1,18 +1,18 @@
-package com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview
+package com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.slobodyanyuk_mykhailo99.bookrest.databinding.FragmentMenuProfileBinding
+import com.slobodyanyuk_mykhailo99.bookrest.databinding.FragmentRestaurantsAllBinding
 
-class ProfileFragment: Fragment() {
-    private var _binding: FragmentMenuProfileBinding? = null
+class AllRestaurantsFragment () : Fragment() {
+    private var _binding: FragmentRestaurantsAllBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentMenuProfileBinding.inflate(inflater,container,false)
+        _binding = FragmentRestaurantsAllBinding.inflate(inflater,container,false)
 
         return binding.root
     }
@@ -22,14 +22,12 @@ class ProfileFragment: Fragment() {
         _binding = null
     }
 
-
     companion object {
-        fun newInstance() : ProfileFragment{
+        fun newInstance() : AllRestaurantsFragment {
             val args: Bundle = Bundle()
-            val fragment = ProfileFragment()
+            val fragment = AllRestaurantsFragment()
             fragment.arguments = args
             return fragment
         }
     }
-
 }

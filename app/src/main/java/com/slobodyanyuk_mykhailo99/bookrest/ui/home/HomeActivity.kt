@@ -8,7 +8,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.R
 import com.slobodyanyuk_mykhailo99.bookrest.databinding.ActivityHomeBinding
 import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.AboutFragment
 import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.ProfileFragment
-import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.RestaurantsFragment
+import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants.RestaurantsFragment
 import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.SettingFragment
 
 class HomeActivity : AppCompatActivity() {
