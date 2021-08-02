@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_restaurant_details_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/vapiano" />
+
+    <TextView
+        android:id="@+id/iv_restaurant_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Vapiano"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_restaurant_details_bg" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_item_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="4.5/5"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_restaurant_item_star"
+        app:layout_constraintEnd_toStartOf="@+id/iv_restaurant_item_star"
+        app:layout_constraintTop_toTopOf="@+id/iv_restaurant_item_star" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_item_quantity_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="(18)"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_restaurant_details_bg" />
+
+    <ImageView
+        android:id="@+id/iv_restaurant_item_star"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_star"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_restaurant_item_quantity_review"
+        app:layout_constraintEnd_toStartOf="@+id/tv_restaurant_item_quantity_review"
+        app:layout_constraintTop_toTopOf="@+id/tv_restaurant_item_quantity_review" />
+
+    <ImageView
+        android:id="@+id/iv_restaurant_details_like"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_restaurant_details_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_like" />
+
+    <TextView
+        android:id="@+id/iv_restaurant_item_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Italian | 8:00-22:00 \n 3,5 km | $$$"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_restaurant_details_bg"
+        app:layout_constraintEnd_toStartOf="@+id/iv_restaurant_details_like"
+        app:layout_constraintStart_toStartOf="@+id/iv_restaurant_details_bg" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_details_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Vapiano"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/flow" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_details_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avenue. Lubomyr Guzar, 17, Kyiv"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_details_name" />
+
+    <TextView
+        android:id="@+id/tag_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/restaurant_tags_bg"
+        android:padding="5dp"
+        android:text="luxury"
+        android:textAlignment="center"
+        android:textColor="@color/light_beige"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tag_second"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_details_name" />
+
+    <TextView
+        android:id="@+id/tag_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="24/7"
+        android:textColor="@color/light_beige"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="@drawable/restaurant_tags_bg"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tag_first"
+        app:layout_constraintEnd_toStartOf="@+id/tag_third"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tag_first"
+        app:layout_constraintTop_toTopOf="@+id/tag_first" />
+
+    <TextView
+        android:id="@+id/tag_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="beautiful view"
+        android:textColor="@color/light_beige"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="@drawable/restaurant_tags_bg"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tag_second"
+        app:layout_constraintEnd_toStartOf="@+id/tag_fourth"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tag_second"
+        app:layout_constraintTop_toTopOf="@+id/tag_second" />
+
+    <TextView
+        android:id="@+id/tag_fourth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bong"
+        android:textColor="@color/light_beige"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="@drawable/restaurant_tags_bg"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tag_third"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tag_third"
+        app:layout_constraintTop_toTopOf="@+id/tag_third" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:constraint_referenced_ids="tag_first, tag_second, tag_third, tag_fourth"
+        app:flow_horizontalBias="0"
+        app:flow_horizontalStyle="spread_inside"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/iv_restaurant_details_bg"></androidx.constraintlayout.helper.widget.Flow>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_begin="16dp"
+        android:orientation="vertical"
+        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_end="16dp"
+        android:orientation="vertical"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

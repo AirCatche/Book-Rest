@@ -82,8 +82,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_item_liked"
-            />
+            android:text="@string/tab_item_all" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -98,7 +97,9 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_item_all" />
+            android:text="@string/tab_item_liked"
+            />
+
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -109,7 +110,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout_restaurant_filter" />
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_restaurant_section" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,7 @@
     <string name="test_greeting">Welcome, Volodya</string>
     <string name="tab_item_liked">Liked</string>
     <string name="tab_item_nearby">Nearby</string>
-    <string name="tab_item_famous">Famous</string>
+    <string name="tab_item_famous">Popular</string>
     <string name="tab_item_all">All</string>
     <string name="content_description_profile_image">profile image</string>
 

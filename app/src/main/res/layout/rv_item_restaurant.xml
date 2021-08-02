@@ -9,7 +9,7 @@
         android:id="@+id/iv_restaurant_item_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHeight_percent="0.3"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         android:layout_marginTop="16dp"
         android:text="Vapiano"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_restaurant_item_bg" />
@@ -37,21 +37,34 @@
         android:layout_marginEnd="8dp"
         android:text="4.5/5"
         android:textColor="@color/white"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/iv_restaurant_item_star"
         app:layout_constraintEnd_toStartOf="@+id/iv_restaurant_item_star"
         app:layout_constraintTop_toTopOf="@+id/iv_restaurant_item_star" />
 
-    <ImageView
-        android:id="@+id/iv_restaurant_item_star"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/tv_restaurant_item_quantity_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_star"
-        app:layout_constraintEnd_toEndOf="@+id/iv_restaurant_item_bg"
+        android:text="(18)"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_restaurant_item_bg" />
+
+    <ImageView
+        android:id="@+id/iv_restaurant_item_star"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_restaurant_item_quantity_review"
+        app:layout_constraintEnd_toStartOf="@+id/tv_restaurant_item_quantity_review"
+        app:layout_constraintTop_toTopOf="@+id/tv_restaurant_item_quantity_review" />
 
     <ImageView
         android:id="@+id/iv_restaurant_item_like"
@@ -73,7 +86,7 @@
         android:textColor="@color/white"
         android:textStyle="italic"
         android:textSize="18sp"
-        android:text="Італийська кухня | 8:00-22:00 \n ||"
+        android:text="Italian | 8:00-22:00 \n 3,5 km | $$$"
         app:layout_constraintBottom_toBottomOf="@+id/iv_restaurant_item_bg"
         app:layout_constraintEnd_toStartOf="@+id/iv_restaurant_item_like"
         app:layout_constraintStart_toStartOf="@+id/iv_restaurant_item_bg" />
