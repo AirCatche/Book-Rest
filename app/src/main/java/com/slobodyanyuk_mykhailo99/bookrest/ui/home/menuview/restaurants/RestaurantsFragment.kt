@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayoutMediator
 import com.slobodyanyuk_mykhailo99.bookrest.databinding.FragmentMenuRestaurantBinding
 
 class RestaurantsFragment: Fragment() {
@@ -15,7 +16,17 @@ class RestaurantsFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
          _binding = FragmentMenuRestaurantBinding.inflate(inflater,container,false)
 
-        binding.vpRestaurant.adapter = PagerAdapter(requireActivity())
+        val adapter = PagerAdapter(requireActivity())
+        binding.vpRestaurant.adapter = adapter
+
+        TabLayoutMediator(binding.tabLayoutRestaurantSection, binding.vpRestaurant) {tab, position ->
+            when(position) {
+                0 -> { tab.text = "ALL" }
+                1 -> { tab.text = "NEARBY"}
+                2 -> { tab.text = "POPULAR"}
+                3 -> { tab.text = "LIKED"}
+            }
+        }
 
         return binding.root
     }

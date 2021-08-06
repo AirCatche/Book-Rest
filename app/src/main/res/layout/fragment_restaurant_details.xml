@@ -104,17 +104,43 @@
         android:textSize="36dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/content_start"
-        app:layout_constraintTop_toBottomOf="@+id/flow" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_restaurant_details_bg" />
 
     <TextView
-        android:id="@+id/tv_restaurant_details_description"
+        android:id="@+id/tv_restaurant_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Avenue. Lubomyr Guzar, 17, Kyiv"
+        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_details_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_details_name" />
+
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/colorPrimaryVariant"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_address" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="+380-22-34-123"
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/flow" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="https://www.witchbar.com.ua/"
         app:layout_constraintEnd_toEndOf="@id/content_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_details_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_phone" />
 
     <TextView
         android:id="@+id/tag_first"
@@ -185,14 +211,17 @@
         android:id="@+id/flow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:constraint_referenced_ids="tag_first, tag_second, tag_third, tag_fourth"
         app:flow_horizontalBias="0"
         app:flow_horizontalStyle="spread_inside"
         app:flow_wrapMode="chain"
         app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@+id/iv_restaurant_details_bg"></androidx.constraintlayout.helper.widget.Flow>
+        app:layout_constraintTop_toBottomOf="@+id/space">
+
+    </androidx.constraintlayout.helper.widget.Flow>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_start"
@@ -208,5 +237,45 @@
         app:layout_constraintGuide_end="16dp"
         android:orientation="vertical"
         />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="?attr/colorPrimary"
+        app:tabTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_url">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Overview" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Photos" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review(12)" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="409dp"
+        android:layout_height="239dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

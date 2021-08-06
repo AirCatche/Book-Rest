@@ -10,7 +10,6 @@ class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fr
     }
 
     override fun createFragment(position: Int): Fragment {
-
         return when(position) {
             0 -> { LikedRestaurantsFragment.newInstance() }
             1 -> { NearbyRestaurantsFragment.newInstance()}
