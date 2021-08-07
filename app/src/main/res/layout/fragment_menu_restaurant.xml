@@ -9,7 +9,7 @@
         android:id="@+id/tv_fragment_about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RESTAURANT"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,34 +72,15 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_restaurant_section"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/et_restaurant_search_a"
-        tools:layout_editor_absoluteX="1dp"
-        android:background="?attr/colorPrimaryVariant">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_item_all" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_item_nearby" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_item_famous" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_item_liked"
-            />
-
+        app:tabTextColor="@color/white"
+        android:textAlignment="center"
+        android:background="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_restaurant_search_a">
 
     </com.google.android.material.tabs.TabLayout>
 

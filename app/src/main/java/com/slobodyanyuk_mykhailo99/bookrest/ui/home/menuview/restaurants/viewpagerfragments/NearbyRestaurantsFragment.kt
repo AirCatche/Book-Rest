@@ -1,19 +1,18 @@
-package com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants
+package com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants.viewpagerfragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.slobodyanyuk_mykhailo99.bookrest.databinding.FragmentRestaurantsLikedBinding
-import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.AboutFragment
+import com.slobodyanyuk_mykhailo99.bookrest.databinding.FragmentTabRestaurantsNearbyBinding
 
-class LikedRestaurantsFragment : Fragment() {
-    private var _binding: FragmentRestaurantsLikedBinding? = null
+class NearbyRestaurantsFragment : Fragment() {
+    private var _binding: FragmentTabRestaurantsNearbyBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentRestaurantsLikedBinding.inflate(inflater,container,false)
+        _binding = FragmentTabRestaurantsNearbyBinding.inflate(inflater,container,false)
 
         return binding.root
     }
@@ -23,9 +22,9 @@ class LikedRestaurantsFragment : Fragment() {
         _binding = null
     }
     companion object {
-        fun newInstance() : LikedRestaurantsFragment {
+        fun newInstance() : NearbyRestaurantsFragment {
             val args: Bundle = Bundle()
-            val fragment = LikedRestaurantsFragment()
+            val fragment = NearbyRestaurantsFragment()
             fragment.arguments = args
             return fragment
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,58 +17,46 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/vapiano" />
 
-    <TextView
-        android:id="@+id/iv_restaurant_item_name"
+    <RatingBar
+        android:id="@+id/rb_restaurant_rating"
+        style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Vapiano"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_restaurant_details_bg" />
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/black"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/light_beige"
+        android:progressTint="?attr/colorSecondary"
+        android:rating="4.5"
+        android:stepSize="0.1"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_restaurant_details_bg"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintWidth_percent="0.4">
+    </RatingBar>
 
     <TextView
-        android:id="@+id/tv_restaurant_item_star"
+        android:id="@+id/util_separator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="4.5/5"
+        android:text="(28)"
         android:textColor="@color/white"
-        android:textSize="24sp"
         android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_restaurant_item_star"
-        app:layout_constraintEnd_toStartOf="@+id/iv_restaurant_item_star"
-        app:layout_constraintTop_toTopOf="@+id/iv_restaurant_item_star" />
+        app:layout_constraintBottom_toBottomOf="@+id/rb_restaurant_rating"
+        app:layout_constraintStart_toEndOf="@+id/rb_restaurant_rating"
+        app:layout_constraintTop_toTopOf="@+id/rb_restaurant_rating" />
 
     <TextView
-        android:id="@+id/tv_restaurant_item_quantity_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="(18)"
+        android:layout_marginStart="8dp"
+        android:text="$$$"
         android:textColor="@color/white"
-        android:textSize="24sp"
         android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_restaurant_details_bg" />
-
-    <ImageView
-        android:id="@+id/iv_restaurant_item_star"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_star"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_restaurant_item_quantity_review"
-        app:layout_constraintEnd_toStartOf="@+id/tv_restaurant_item_quantity_review"
-        app:layout_constraintTop_toTopOf="@+id/tv_restaurant_item_quantity_review" />
+        app:layout_constraintBottom_toBottomOf="@+id/rb_restaurant_rating"
+        app:layout_constraintStart_toEndOf="@+id/util_separator"
+        app:layout_constraintTop_toTopOf="@+id/rb_restaurant_rating" />
 
     <ImageView
         android:id="@+id/iv_restaurant_details_like"
@@ -99,20 +88,30 @@
         android:id="@+id/tv_restaurant_details_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Vapiano"
+        android:textColor="@color/white"
         android:textSize="36dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/content_start"
-        app:layout_constraintTop_toBottomOf="@+id/iv_restaurant_details_bg" />
+        app:layout_constraintBottom_toTopOf="@+id/rb_restaurant_rating"
+        app:layout_constraintStart_toStartOf="@+id/content_start" />
 
     <TextView
         android:id="@+id/tv_restaurant_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Avenue. Lubomyr Guzar, 17, Kyiv"
-        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_details_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_details_name" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon_address"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon_address"
+        app:layout_constraintTop_toTopOf="@+id/iv_icon_address" />
+
+    <ImageView
+        android:id="@+id/iv_icon_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/flow" />
 
     <View
         android:id="@+id/space"
@@ -120,27 +119,44 @@
         android:layout_height="3dp"
         android:layout_marginTop="8dp"
         android:background="?attr/colorPrimaryVariant"
-        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_address" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_link"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/tv_restaurant_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="+380-22-34-123"
-        app:layout_constraintStart_toStartOf="@+id/content_start"
-        app:layout_constraintTop_toBottomOf="@+id/flow" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon_phone"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon_phone"
+        app:layout_constraintTop_toTopOf="@+id/iv_icon_phone" />
 
-    <TextView
-        android:id="@+id/tv_restaurant_url"
+    <ImageView
+        android:id="@+id/iv_icon_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:src="@drawable/ic_phone"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_address"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="https://www.witchbar.com.ua/"
-        app:layout_constraintEnd_toEndOf="@id/content_end"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_phone" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon_link"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon_link"
+        app:layout_constraintTop_toTopOf="@+id/iv_icon_link" />
+
+    <ImageView
+        android:id="@+id/iv_icon_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_link"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_phone"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/tag_first"
@@ -216,10 +232,9 @@
         app:flow_horizontalBias="0"
         app:flow_horizontalStyle="spread_inside"
         app:flow_wrapMode="chain"
-        app:layout_constraintEnd_toEndOf="@id/content_end"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@+id/space">
+        app:layout_constraintEnd_toStartOf="@+id/content_end"
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/iv_restaurant_details_bg">
 
     </androidx.constraintlayout.helper.widget.Flow>
 
@@ -239,15 +254,14 @@
         />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="409dp"
+        android:id="@+id/tab_layout_restaurant_details"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="?attr/colorPrimary"
-        app:tabTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_url">
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:tabTextColor="@color/white">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -262,20 +276,22 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Photos" />
+            android:text="Location" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Review(12)" />
+            android:text="Review" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="409dp"
-        android:layout_height="239dp"
-        android:layout_marginTop="2dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_restaurant_details">
+
+    </androidx.viewpager2.widget.ViewPager2>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
