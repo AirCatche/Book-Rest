@@ -15,46 +15,47 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
-    private val navListener = NavigationBarView.OnItemSelectedListener { item ->
-        var selectedFragment = Fragment()
-        when (item.itemId) {
-            R.id.nav_restaurants -> {
-                selectedFragment = RestaurantsFragment.newInstance()
-            }
-            R.id.nav_profile -> {
-                selectedFragment = ProfileFragment.newInstance()
-            }
-            R.id.nav_settings -> {
-                selectedFragment = SettingFragment.newInstance()
-            }
-            R.id.nav_about -> {
-                selectedFragment = AboutFragment.newInstance()
-            }
-        }
-        supportFragmentManager.beginTransaction()
-            .replace(binding.includeContentHome.mainFragmentContainer.id, selectedFragment).commit()
-        return@OnItemSelectedListener true
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        // Create specific bottom navigation + set menu item listener
+        setupBottomNavigation()
+        selectFragmentRestaurant()
+    }
+
+    private fun setupBottomNavigation() {
+        val navListener = NavigationBarView.OnItemSelectedListener { item ->
+            var selectedFragment = Fragment()
+            when (item.itemId) {
+                R.id.nav_restaurants -> {
+                    selectedFragment = RestaurantsFragment.newInstance()
+                }
+                R.id.nav_profile -> {
+                    selectedFragment = ProfileFragment.newInstance()
+                }
+                R.id.nav_settings -> {
+                    selectedFragment = SettingFragment.newInstance()
+                }
+                R.id.nav_about -> {
+                    selectedFragment = AboutFragment.newInstance()
+                }
+            }
+            supportFragmentManager.beginTransaction()
+                .replace(binding.includeContentHome.contentHomeFragmentContainer.id, selectedFragment).commit()
+            return@OnItemSelectedListener true
+        }
         binding.bottomNavigation.apply {
             background = null
             itemTextAppearanceActive = 0
             setOnItemSelectedListener(navListener)
         }
-
-        selectFragmentRestaurant()
     }
 
     private fun selectFragmentRestaurant() {
         supportFragmentManager.beginTransaction()
-            .replace(binding.includeContentHome.mainFragmentContainer.id, RestaurantsFragment.newInstance()).commit()
+            .replace(binding.includeContentHome.contentHomeFragmentContainer.id, RestaurantsFragment.newInstance()).commit()
         binding.bottomNavigation.selectedItemId = R.id.nav_restaurants
     }
 

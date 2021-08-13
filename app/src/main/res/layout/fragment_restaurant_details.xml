@@ -69,7 +69,7 @@
         app:srcCompat="@drawable/ic_like" />
 
     <TextView
-        android:id="@+id/iv_restaurant_item_description"
+        android:id="@+id/tv_restaurant_item_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -99,6 +99,7 @@
         android:id="@+id/tv_restaurant_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="Avenue. Lubomyr Guzar, 17, Kyiv"
         app:layout_constraintBottom_toBottomOf="@+id/iv_icon_address"
         app:layout_constraintStart_toEndOf="@+id/iv_icon_address"
@@ -119,13 +120,14 @@
         android:layout_height="3dp"
         android:layout_marginTop="8dp"
         android:background="?attr/colorPrimaryVariant"
-        app:layout_constraintTop_toBottomOf="@+id/iv_icon_link"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_phone"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/tv_restaurant_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="+380-22-34-123"
         app:layout_constraintBottom_toBottomOf="@+id/iv_icon_phone"
         app:layout_constraintStart_toEndOf="@+id/iv_icon_phone"
@@ -137,13 +139,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_phone"
-        app:layout_constraintTop_toBottomOf="@+id/iv_icon_address"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_link" />
 
     <TextView
         android:id="@+id/tv_restaurant_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="https://www.witchbar.com.ua/"
         app:layout_constraintBottom_toBottomOf="@+id/iv_icon_link"
         app:layout_constraintStart_toEndOf="@+id/iv_icon_link"
@@ -155,8 +158,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_link"
-        app:layout_constraintTop_toBottomOf="@+id/iv_icon_phone"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_address" />
 
     <TextView
         android:id="@+id/tag_first"
@@ -259,6 +262,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space"
         app:tabTextColor="@color/white">

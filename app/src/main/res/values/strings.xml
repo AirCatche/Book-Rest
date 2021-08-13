@@ -29,5 +29,7 @@
     <string name="tab_item_famous">Popular</string>
     <string name="tab_item_all">All</string>
     <string name="content_description_profile_image">profile image</string>
+    <string name="review_parentheses">(%1$s)</string>
+
 
 </resources>
