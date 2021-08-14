@@ -3,30 +3,25 @@ package com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.slobodyanyuk_mykhailo99.bookrest.R
 import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
 import com.slobodyanyuk_mykhailo99.bookrest.databinding.ActivitySignUpBinding
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
-import org.kodein.di.android.kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
+import dagger.hilt.android.AndroidEntryPoint
 
-class SignUpActivity : AppCompatActivity(), SignUpListener, KodeinAware {
-
-    override val kodein by kodein()
-    private val factory: SignUpViewModelFactory by instance()
+@AndroidEntryPoint
+class SignUpActivity : AppCompatActivity(), SignUpListener {
 
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var signUpViewModel: SignUpViewModel
+    private val signUpViewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
-        signUpViewModel = ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
         binding.lifecycleOwner = this@SignUpActivity
         binding.viewmodel = signUpViewModel
         signUpViewModel.signUpListener = this

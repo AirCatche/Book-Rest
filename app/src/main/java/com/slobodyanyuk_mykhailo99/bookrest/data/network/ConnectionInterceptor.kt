@@ -6,10 +6,14 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import com.slobodyanyuk_mykhailo99.bookrest.util.Constants
 import com.slobodyanyuk_mykhailo99.bookrest.util.NetworkException
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class ConnectionInterceptor(context: Context) : Interceptor {
+class ConnectionInterceptor @Inject constructor(
+    @ApplicationContext context: Context,
+) : Interceptor {
     private val appContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isInternetAvailable()) {

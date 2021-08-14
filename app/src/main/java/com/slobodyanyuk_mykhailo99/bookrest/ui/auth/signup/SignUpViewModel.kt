@@ -8,16 +8,19 @@ import androidx.lifecycle.*
 
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
-import com.slobodyanyuk_mykhailo99.bookrest.preference.PreferenceProvider
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
 import com.slobodyanyuk_mykhailo99.bookrest.util.NetworkException
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.net.SocketTimeoutException
+import javax.inject.Inject
 
-class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
+    private val repository: UserRepository,
+) : ViewModel(), LifecycleObserver {
 
-    lateinit var preferenceProvider: PreferenceProvider
     lateinit var signUpListener: SignUpListener
 
     val email: MutableLiveData<String> = MutableLiveData()

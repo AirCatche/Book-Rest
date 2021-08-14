@@ -11,9 +11,15 @@ import com.slobodyanyuk_mykhailo99.bookrest.preference.PreferenceProvider
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.net.SocketTimeoutException
+import javax.inject.Inject
 
-class LoginViewModel(private val repository: UserRepository, private val preferenceProvider: PreferenceProvider) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val repository: UserRepository,
+    private val preferenceProvider: PreferenceProvider,
+    ) : ViewModel(), LifecycleObserver {
 
     lateinit var loginListener: LoginListener
 

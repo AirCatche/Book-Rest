@@ -14,7 +14,6 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import com.slobodyanyuk_mykhailo99.bookrest.R
 
-
 class DialogLoading(private val activity: Activity) {
     private lateinit var dialog: Dialog
     private lateinit var animation: AnimationDrawable

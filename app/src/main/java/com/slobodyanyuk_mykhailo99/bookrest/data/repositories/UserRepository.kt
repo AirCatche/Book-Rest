@@ -8,11 +8,14 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestApi
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.LoginResponse
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.SignUpResponse
-import com.slobodyanyuk_mykhailo99.bookrest.preference.PreferenceProvider
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class UserRepository(private val api: BookRestApi,
-                     private val db: BookRestDatabase,
-                     private val preferences: PreferenceProvider): BookRestRequest() {
+@Singleton
+class UserRepository @Inject constructor(
+    private val api: BookRestApi,
+    private val db: BookRestDatabase,
+    ): BookRestRequest() {
 
     suspend fun userLogin(loginRequest: LoginRequest) : LoginResponse {
         return apiRequest {
@@ -24,7 +27,6 @@ class UserRepository(private val api: BookRestApi,
             api.userSignUp(signUpRequest)
         }
     }
-
 
     suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
 

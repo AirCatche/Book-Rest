@@ -4,7 +4,10 @@ import android.content.Context
 import android.util.Patterns
 import java.util.regex.Pattern
 
-data class ValidationModel(val isValid: Boolean, val message: String) {
+data class ValidationModel(
+    val isValid: Boolean,
+    val message: String,
+) {
     companion object {
         val AUTH_PASSWORD_PATTERN: Pattern = Pattern.compile(
             "(?=.*[a-zA-Z])" +

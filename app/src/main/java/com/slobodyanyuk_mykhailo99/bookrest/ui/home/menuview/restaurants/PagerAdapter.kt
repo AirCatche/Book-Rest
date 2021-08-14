@@ -10,7 +10,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants.viewpag
 import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants.viewpagerfragments.LikedRestaurantsFragment
 import com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants.viewpagerfragments.NearbyRestaurantsFragment
 
-class PagerAdapter(fragmentActivity:  FragmentManager, lifecycle: Lifecycle, private val restaurants: List<Restaurant>) : FragmentStateAdapter(fragmentActivity,lifecycle) {
+class PagerAdapter(fragmentActivity: FragmentManager, lifecycle: Lifecycle, private val restaurants: List<Restaurant>) : FragmentStateAdapter(fragmentActivity,lifecycle) {
 
     override fun getItemCount(): Int {
         return 4

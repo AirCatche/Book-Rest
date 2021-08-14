@@ -4,9 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.slobodyanyuk_mykhailo99.bookrest.util.PreferenceKeys.KEY_TOKEN
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 
-class PreferenceProvider (context: Context){
+class PreferenceProvider @Inject constructor(
+    @ApplicationContext context: Context,
+){
 
     private val appContext = context.applicationContext
 
