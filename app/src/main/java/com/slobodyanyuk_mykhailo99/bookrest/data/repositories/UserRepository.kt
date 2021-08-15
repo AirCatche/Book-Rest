@@ -9,9 +9,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.LoginResponse
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.responses.SignUpResponse
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class UserRepository @Inject constructor(
     private val api: BookRestApi,
     private val db: BookRestDatabase,

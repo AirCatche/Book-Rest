@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="viewmodel"
             type="com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginViewModel" />
@@ -177,7 +175,6 @@
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

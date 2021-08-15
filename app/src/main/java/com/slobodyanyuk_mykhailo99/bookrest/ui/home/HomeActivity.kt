@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        viewModel
+
         setupBottomNavigation()
         selectFragmentRestaurant()
     }

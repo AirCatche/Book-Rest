@@ -22,7 +22,6 @@ class ProfileFragment: Fragment() {
         _binding = null
     }
 
-
     companion object {
         fun newInstance() : ProfileFragment{
             val args: Bundle = Bundle()
