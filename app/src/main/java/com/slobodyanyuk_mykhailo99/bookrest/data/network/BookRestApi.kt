@@ -20,8 +20,4 @@ interface BookRestApi {
     @POST("login")
     suspend fun userLogin(@Body request: LoginRequest) : Response<LoginResponse>
 
-
-
-
-
 }

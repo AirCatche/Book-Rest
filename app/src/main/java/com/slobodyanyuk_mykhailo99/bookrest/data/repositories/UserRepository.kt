@@ -28,6 +28,6 @@ class UserRepository @Inject constructor(
 
     suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
 
-    fun getUser() = db.getUserDao().getUser()
+    suspend fun getUser() = db.getUserDao().getUser()
 
 }

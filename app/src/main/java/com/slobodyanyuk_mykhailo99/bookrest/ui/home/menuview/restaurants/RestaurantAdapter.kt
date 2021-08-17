@@ -1,4 +1,4 @@
-package com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants.viewpagerfragments
+package com.slobodyanyuk_mykhailo99.bookrest.ui.home.menuview.restaurants
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.slobodyanyuk_mykhailo99.bookrest.R
 import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.Restaurant
+import com.squareup.picasso.Picasso
 
 class RestaurantAdapter (private val restaurants: List<Restaurant>) : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder>() {
 
@@ -22,9 +23,9 @@ class RestaurantAdapter (private val restaurants: List<Restaurant>) : RecyclerVi
         holder.name.text = currentRestaurant.name
         holder.description.text = currentRestaurant.description
         holder.quantityReviews.text = "(${currentRestaurant.reviews?.size})"
-        holder.like.isPressed = currentRestaurant.isLiked == "true"
+        holder.like.isPressed = (currentRestaurant.isLiked == "true")
         holder.rating.rating = currentRestaurant.reviews?.first()?.estimation?.toFloat() ?: 0f
-
+        Picasso.get().load(currentRestaurant.photos?.first()).into(holder.photo)
     }
 
     override fun getItemCount(): Int {

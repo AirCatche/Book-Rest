@@ -1,6 +1,5 @@
 package com.slobodyanyuk_mykhailo99.bookrest.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,8 +14,9 @@ interface UserDao {
     suspend fun upsert(user: User) : Long
 
     @Query("SELECT * FROM user WHERE uid = $CURRENT_USER_ID")
+    suspend fun getUser() : User
 
-    fun getUser() : LiveData<User>
-
+    @Query("DELETE FROM user WHERE uid = $CURRENT_USER_ID")
+    suspend fun deleteUser() : Int
 
 }

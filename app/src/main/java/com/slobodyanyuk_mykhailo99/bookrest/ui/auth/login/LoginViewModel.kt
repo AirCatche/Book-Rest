@@ -94,8 +94,6 @@ class LoginViewModel @Inject constructor(
         isValid.postValue(password&&username)
     }
 
-
-
     companion object {
         private const val TAG = "AuthViewModel"
     }

@@ -4,8 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 const val CURRENT_USER_ID = 0
-
-@Entity()
+@Entity(tableName = "user")
 data class User(
     var id: Int? = null,
     var username: String? = null,
