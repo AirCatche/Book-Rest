@@ -17,26 +17,32 @@
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-
-        </activity>
-
-        <activity
-            android:name=".ui.auth.login.LoginActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
-
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="LockedOrientationActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name=".ui.auth.login.LoginActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+        </activity>
+
+        <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name=".ui.home.HomeActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"
+            android:exported="true">
+
+        </activity>
+
     </application>
 </manifest>
+
 <!--    android:windowSoftInputMode="stateHidden|adjustResize"-->

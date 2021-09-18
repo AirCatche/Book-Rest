@@ -1,6 +1,5 @@
 package com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login
 
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
@@ -12,7 +11,9 @@ import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup.SignUpActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
 import java.net.SocketTimeoutException
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,16 +24,14 @@ class LoginViewModel @Inject constructor(
 
     lateinit var loginListener: LoginListener
 
-    val username: MutableLiveData<String> = MutableLiveData()
-    val password: MutableLiveData<String> = MutableLiveData()
+    private val _username = MutableStateFlow("")
+    private val _password = MutableStateFlow("")
 
-    val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
-    val passwordErrorMessage: MutableLiveData<String> = MutableLiveData()
-    val responseError: MutableLiveData<String> = MutableLiveData()
+    val username: StateFlow<String> = _username.asStateFlow()
+    val password: StateFlow<String> = _password.asStateFlow()
 
-    private var isUsernameValid: Boolean = false
-    private var isPasswordValid: Boolean = false
-    val isValid: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isValid = MutableStateFlow(false)
+    val isValid: StateFlow<Boolean> = _isValid.asStateFlow()
 
     fun onSignUpText(view: View) {
         Intent(view.context, SignUpActivity::class.java).also {
@@ -41,8 +40,8 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun onLoginButton(view: View) {     //??????
-        loginListener.onStarted()
+    fun login() {
+        loginListener.onLoading()
         Log.d(TAG, "onSubmitClick: ${username.value}")
         Log.d(TAG, "onSubmitClick: ${password.value}")
         Coroutines.main {
@@ -75,27 +74,33 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun setupInputObservers (lifecycleOwner: LifecycleOwner, context: Context) {
-        username.observe(lifecycleOwner, Observer {
-            val validationModel = it.validateUsername(context)
-            isUsernameValid = validationModel.isValid
-            validateInput(isUsernameValid, isPasswordValid)
-            usernameErrorMessage.postValue(validationModel.message)
-        })
-        password.observe(lifecycleOwner, Observer {
-            val validationModel = it.validatePassword(context)
-            isPasswordValid = validationModel.isValid
-            validateInput(isUsernameValid, isPasswordValid)
-            passwordErrorMessage.postValue(validationModel.message)
-        })
+    val isUsernameCorrect: Flow<Boolean> = username.map {
+        username.value.isNotBlank()
     }
 
-    private fun validateInput(username:Boolean, password:Boolean) {
-        isValid.postValue(password&&username)
+    val isPasswordCorrect: Flow<Boolean> = password.map {
+        PASSWORD_PATTERN.matcher(it).matches()
     }
 
+    val isSubmitEnabled: Flow<Boolean> = combine(isUsernameCorrect, isPasswordCorrect) { username, password ->
+        return@combine username && password
+    }
+
+    fun setUsername(username: String){
+        _username.value = username
+    }
+    fun setPassword(password: String){
+        _password.value = password
+    }
     companion object {
         private const val TAG = "AuthViewModel"
+
+        private val PASSWORD_PATTERN = Pattern.compile(
+            "(?=.*[a-zA-Z])" +          // a-z A-Z
+                    "(?=\\S+$)" +            //no white spaces
+                    ".{6,15}" +              //at least 6 characters
+                    "$"
+        )
     }
 
 }

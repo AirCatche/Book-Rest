@@ -1,11 +1,10 @@
 package com.slobodyanyuk_mykhailo99.bookrest.ui.auth.signup
 
-import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.*
-
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
@@ -13,7 +12,9 @@ import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
 import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
 import com.slobodyanyuk_mykhailo99.bookrest.util.NetworkException
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
 import java.net.SocketTimeoutException
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,22 +24,12 @@ class SignUpViewModel @Inject constructor(
 
     lateinit var signUpListener: SignUpListener
 
-    val email: MutableLiveData<String> = MutableLiveData()
-    val password: MutableLiveData<String> = MutableLiveData()
-    val confirmation: MutableLiveData<String> = MutableLiveData()
-    val username: MutableLiveData<String> = MutableLiveData()
+    val email: MutableStateFlow<String> = MutableStateFlow("")
+    val password: MutableStateFlow<String> = MutableStateFlow("")
+    val confirmation: MutableStateFlow<String> = MutableStateFlow("")
+    val username: MutableStateFlow<String> = MutableStateFlow("")
 
-    val emailErrorMessage: MutableLiveData<String> = MutableLiveData()
-    val passwordErrorMessage: MutableLiveData<String> = MutableLiveData()
-    val confirmationErrorMessage: MutableLiveData<String> = MutableLiveData()
-    val usernameErrorMessage: MutableLiveData<String> = MutableLiveData()
-    val responseErrorMessage: MutableLiveData<String> = MutableLiveData()
-
-    private var isEmailValid: Boolean = false
-    private var isPasswordValid: Boolean = false
-    private var isConfirmationValid: Boolean = false
-    private var isUsernameValid: Boolean = false
-    val isValid: MutableLiveData<Boolean> = MutableLiveData()
+    val isValid: StateFlow<Boolean> = MutableStateFlow(false)
 
     fun onLoginText(view: View) {
         Intent(view.context, LoginActivity::class.java).also {
@@ -47,8 +38,8 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpButton(view: View) {
-        signUpListener.onStarted()
+    fun onSignUpButton() {
+        signUpListener.onLoading()
         Coroutines.main {
             Log.d(TAG, "onSubmitClick: starts coroutine")
             try {
@@ -57,7 +48,8 @@ class SignUpViewModel @Inject constructor(
                         email.value,
                         password.value,
                         confirmation.value,
-                        username.value))
+                        username.value,
+                    ))
                 Log.d(TAG, "onSignUp: user is ${signUpResponse.user}")
                 signUpResponse.user?.let {
                     signUpListener.onSuccess(it)
@@ -79,39 +71,55 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    fun setupInputObservers (lifecycleOwner: LifecycleOwner, context: Context) {
-        email.observe(lifecycleOwner, Observer {
-            val validationModel = it.validateEmail(context)
-            isEmailValid = validationModel.isValid
-            validateInput(isEmailValid, isPasswordValid, isConfirmationValid, isUsernameValid)
-            emailErrorMessage.postValue(validationModel.message)
-        })
-        password.observe(lifecycleOwner, Observer {
-            val validationModel = it.validatePassword(context)
-            isPasswordValid = validationModel.isValid
-            validateInput(isEmailValid, isPasswordValid, isConfirmationValid, isUsernameValid)
-            passwordErrorMessage.postValue(validationModel.message)
-        })
-        confirmation.observe(lifecycleOwner, Observer {
-            val validationModel = it.validateConfirmation(password.value, context)
-            isConfirmationValid = validationModel.isValid
-            validateInput(isEmailValid, isPasswordValid, isConfirmationValid, isUsernameValid)
-            confirmationErrorMessage.postValue(validationModel.message)
-        })
-        username.observe(lifecycleOwner, Observer {
-            val validationModel = it.validateUsername(context)
-            isUsernameValid = validationModel.isValid
-            validateInput(isEmailValid, isPasswordValid, isConfirmationValid, isUsernameValid)
-            usernameErrorMessage.postValue(validationModel.message)
-        })
+    val isUsernameCorrect: Flow<Boolean> = username.map {
+        username.value.isNotBlank()
     }
 
-    private fun validateInput(email:Boolean,password:Boolean,confirmation:Boolean,username:Boolean) {
-        isValid.postValue(email&&password&&confirmation&&username)
+    val isPasswordCorrect: Flow<Boolean> = password.map {
+        PASSWORD_PATTERN.matcher(it).matches()
+    }
+
+    val isConfirmationCorrect: Flow<Boolean> = combine(password,confirmation) { password, confirmation ->
+        val isPassCorrect = PASSWORD_PATTERN.matcher(password).matches()
+        val isConfirmCorrect = password == confirmation
+        return@combine isPassCorrect && isConfirmCorrect
+    }
+
+    val isEmailCorrect: Flow<Boolean> = email.map {
+        Patterns.EMAIL_ADDRESS.matcher(it).matches()
+    }
+
+    val isSubmitEnabled: Flow<Boolean> = combine(
+        isUsernameCorrect,
+        isPasswordCorrect,
+        isConfirmationCorrect,
+        isEmailCorrect,
+    ) { username, password, confirmation, email ->
+        return@combine username && password && confirmation && email
+    }
+
+    fun setUsername(username: String){
+        this.username.value = username
+    }
+    fun setPassword(password: String){
+        this.password.value = password
+    }
+    fun setConfirmation(confirmation: String){
+        this.confirmation.value = confirmation
+    }
+    fun setEmail(email: String){
+        this.email.value = email
     }
 
     companion object {
         private const val TAG = "AuthViewModel"
+
+        private val PASSWORD_PATTERN = Pattern.compile(
+            "(?=.*[a-zA-Z])" +          // a-z A-Z
+                    "(?=\\S+$)" +            //no white spaces
+                    ".{6,15}" +              //at least 6 characters
+                    "$"
+        )
     }
 
 }

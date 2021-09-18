@@ -1,4 +1,4 @@
-package com.slobodyanyuk_mykhailo99.bookrest.ui
+package com.slobodyanyuk_mykhailo99.bookrest.ui.helpers
 
 import android.annotation.SuppressLint
 import android.app.Activity

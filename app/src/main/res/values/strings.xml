@@ -30,6 +30,19 @@
     <string name="tab_item_all">All</string>
     <string name="content_description_profile_image">profile image</string>
     <string name="review_parentheses">(%1$s)</string>
+    <string name="base_url">https://bookrest1.herokuapp.com/api/v1/auth/</string>
 
+<!--    LOGIN ERRORS -->
+    <string name="error_empty_password">Please enter password</string>
+    <string name="error_empty_username">Please enter username</string>
+    <string name="error_empty_email">Please enter email address</string>
+    <string name="error_empty_confirmation">Please confirm your password</string>
+    <string name="error_incorrect_password">Weak password. Allowing a—z, numbers</string>
+    <string name="error_incorrect_username">Unacceptable password. Allowing a—z, A—Z, 0—9</string>
+    <string name="error_incorrect_email">Please check correctness of email address</string>
+    <string name="error_incorrect_confirmation">Confirmation should match the password</string>
+    <string name="error_success"> </string>
+    <string name="error_server_not_responding">Oops, bad things happened.. Try again</string>
+    <string name="error_no_internet">Make sure you have an active data connection</string>
 
 </resources>

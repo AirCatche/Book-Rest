@@ -6,7 +6,7 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.db.BookRestDatabase
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.BookRestApi
 import com.slobodyanyuk_mykhailo99.bookrest.data.network.ConnectionInterceptor
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
-import com.slobodyanyuk_mykhailo99.bookrest.util.Constants
+import com.slobodyanyuk_mykhailo99.bookrest.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,7 +36,7 @@ object BookRestModule {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(BookRestApi::class.java)
