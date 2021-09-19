@@ -12,10 +12,8 @@ import com.slobodyanyuk_mykhailo99.bookrest.R
 import com.slobodyanyuk_mykhailo99.bookrest.databinding.ActivityLoginBinding
 import com.slobodyanyuk_mykhailo99.bookrest.ui.helpers.DialogLoading
 import com.slobodyanyuk_mykhailo99.bookrest.ui.home.HomeActivity
-
+import com.slobodyanyuk_mykhailo99.bookrest.util.*
 import com.slobodyanyuk_mykhailo99.bookrest.util.Constants.SUCCESS
-import com.slobodyanyuk_mykhailo99.bookrest.util.launchWhenStarted
-import com.slobodyanyuk_mykhailo99.bookrest.util.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -69,20 +67,22 @@ import kotlinx.coroutines.flow.onEach
              }.launchWhenStarted(lifecycleScope)
 
          viewModel.isUsernameCorrect
-             .onEach { isCorrect ->
-                 binding.etLoginUsernameWrapper.error = if (isCorrect) {
-                     SUCCESS
-                 } else {
-                     getString(R.string.error_empty_username)
+             .onEach { error ->
+                 binding.etLoginUsernameWrapper.error = when(error) {
+                     UsernameError.Empty -> { getString(R.string.error_username_empty) }
+                     UsernameError.Length -> { getString(R.string.error_username_length) }
+                     UsernameError.Format -> { getString(R.string.error_username_incorrect) }
+                     UsernameError.Correct -> { SUCCESS }
                  }
              }.launchWhenStarted(lifecycleScope)
 
          viewModel.isPasswordCorrect
-             .onEach { isCorrect ->
-                 binding.etLoginPasswordWrapper.error = if (isCorrect) {
-                     SUCCESS
-                 } else{
-                     getString(R.string.error_incorrect_password)
+             .onEach { error ->
+                 binding.etLoginPasswordWrapper.error = when (error) {
+                     PasswordError.Empty -> { getString(R.string.error_password_empty) }
+                     PasswordError.Length -> { getString(R.string.error_password_length) }
+                     PasswordError.Format -> { getString(R.string.error_password_incorrect) }
+                     PasswordError.Correct -> { SUCCESS }
                  }
              }.launchWhenStarted(lifecycleScope)
      }

@@ -9,12 +9,12 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.network.requests.SignUpRequest
 import com.slobodyanyuk_mykhailo99.bookrest.data.repositories.UserRepository
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.*
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
-import com.slobodyanyuk_mykhailo99.bookrest.util.Coroutines
-import com.slobodyanyuk_mykhailo99.bookrest.util.NetworkException
+import com.slobodyanyuk_mykhailo99.bookrest.util.*
+import com.slobodyanyuk_mykhailo99.bookrest.util.ValidationPattern.PASSWORD_PATTERN
+import com.slobodyanyuk_mykhailo99.bookrest.util.ValidationPattern.USERNAME_PATTERN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import java.net.SocketTimeoutException
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -71,31 +71,58 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    val isUsernameCorrect: Flow<Boolean> = username.map {
-        username.value.isNotBlank()
+    val isUsernameCorrect: Flow<UsernameError> = username.map {
+        val lengthNotMatch = it.length < 3 || it.length > 15
+        val incorrectUsername = !USERNAME_PATTERN.matcher(it).matches()
+        when {
+            it.isBlank() -> { UsernameError.Empty }
+            lengthNotMatch -> { UsernameError.Length }
+            incorrectUsername -> { UsernameError.Format }
+            else -> { UsernameError.Correct }
+        }
     }
 
-    val isPasswordCorrect: Flow<Boolean> = password.map {
-        PASSWORD_PATTERN.matcher(it).matches()
+    val isPasswordCorrect: Flow<PasswordError> = password.map {
+        val incorrectPassword = !PASSWORD_PATTERN.matcher(it).matches()
+        val lengthNotMatch = it.length < 6 || it.length > 15
+        when {
+            it.isBlank() -> { PasswordError.Empty }
+            lengthNotMatch -> { PasswordError.Length }
+            incorrectPassword -> { PasswordError.Format }
+            else -> { PasswordError.Correct }
+        }
     }
 
-    val isConfirmationCorrect: Flow<Boolean> = combine(password,confirmation) { password, confirmation ->
-        val isPassCorrect = PASSWORD_PATTERN.matcher(password).matches()
-        val isConfirmCorrect = password == confirmation
-        return@combine isPassCorrect && isConfirmCorrect
+    val isConfirmationCorrect: Flow<ConfirmationError> = combine(password,confirmation) { password, confirmation ->
+        val incorrectConfirmation = !PASSWORD_PATTERN.matcher(confirmation).matches()
+        val isDifferent = confirmation != password
+        return@combine when {
+            confirmation.isBlank() -> { ConfirmationError.Empty }
+            incorrectConfirmation -> { ConfirmationError.Format }
+            isDifferent -> { ConfirmationError.Different }
+            else -> { ConfirmationError.Correct }
+        }
     }
 
-    val isEmailCorrect: Flow<Boolean> = email.map {
-        Patterns.EMAIL_ADDRESS.matcher(it).matches()
+    val isEmailCorrect: Flow<EmailError> = email.map {
+        val emailIncorrect = !Patterns.EMAIL_ADDRESS.matcher(it).matches()
+        when {
+            it.isBlank() -> { EmailError.Empty }
+            emailIncorrect -> { EmailError.Format }
+            else -> { EmailError.Correct }
+        }
     }
 
     val isSubmitEnabled: Flow<Boolean> = combine(
-        isUsernameCorrect,
-        isPasswordCorrect,
-        isConfirmationCorrect,
-        isEmailCorrect,
+        username,
+        password,
+        confirmation,
+        email,
     ) { username, password, confirmation, email ->
-        return@combine username && password && confirmation && email
+        return@combine USERNAME_PATTERN.matcher(username).matches() &&
+                        PASSWORD_PATTERN.matcher(password).matches() &&
+                        confirmation == password &&
+                        Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     fun setUsername(username: String){
@@ -114,12 +141,5 @@ class SignUpViewModel @Inject constructor(
     companion object {
         private const val TAG = "AuthViewModel"
 
-        private val PASSWORD_PATTERN = Pattern.compile(
-            "(?=.*[a-zA-Z])" +          // a-z A-Z
-                    "(?=\\S+$)" +            //no white spaces
-                    ".{6,15}" +              //at least 6 characters
-                    "$"
-        )
     }
-
 }

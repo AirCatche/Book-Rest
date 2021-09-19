@@ -13,9 +13,8 @@ import com.slobodyanyuk_mykhailo99.bookrest.data.db.entity.User
 import com.slobodyanyuk_mykhailo99.bookrest.databinding.ActivitySignUpBinding
 import com.slobodyanyuk_mykhailo99.bookrest.ui.helpers.DialogLoading
 import com.slobodyanyuk_mykhailo99.bookrest.ui.auth.login.LoginActivity
+import com.slobodyanyuk_mykhailo99.bookrest.util.*
 import com.slobodyanyuk_mykhailo99.bookrest.util.Constants.SUCCESS
-import com.slobodyanyuk_mykhailo99.bookrest.util.launchWhenStarted
-import com.slobodyanyuk_mykhailo99.bookrest.util.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -76,38 +75,41 @@ class SignUpActivity : AppCompatActivity(), SignUpListener {
             }.launchWhenStarted(lifecycleScope)
 
         viewModel.isUsernameCorrect
-            .onEach { isCorrect ->
-                binding.etSignupUsernameWrapper.error = if (isCorrect) {
-                    SUCCESS
-                } else {
-                    getString(R.string.error_empty_username)
+            .onEach { error ->
+                binding.etSignupUsernameWrapper.error = when(error) {
+                    UsernameError.Empty -> { getString(R.string.error_username_empty) }
+                    UsernameError.Length -> { getString(R.string.error_username_length) }
+                    UsernameError.Format -> { getString(R.string.error_username_incorrect) }
+                    UsernameError.Correct -> { SUCCESS }
                 }
             }.launchWhenStarted(lifecycleScope)
 
         viewModel.isPasswordCorrect
-            .onEach { isCorrect ->
-                binding.etSignupPasswordWrapper.error = if (isCorrect) {
-                    SUCCESS
-                } else{
-                    getString(R.string.error_incorrect_password)
+            .onEach { error ->
+                binding.etSignupPasswordWrapper.error = when (error) {
+                    PasswordError.Empty -> { getString(R.string.error_password_empty) }
+                    PasswordError.Length -> { getString(R.string.error_password_length) }
+                    PasswordError.Format -> { getString(R.string.error_password_incorrect) }
+                    PasswordError.Correct -> { SUCCESS }
                 }
             }.launchWhenStarted(lifecycleScope)
 
         viewModel.isConfirmationCorrect
-            .onEach { isCorrect ->
-                binding.etSignupConfirmationWrapper.error = if (isCorrect) {
-                    SUCCESS
-                } else {
-                    getString(R.string.error_incorrect_confirmation)
+            .onEach { error ->
+                binding.etSignupConfirmationWrapper.error = when (error) {
+                    ConfirmationError.Empty -> { getString(R.string.error_confirmation_empty) }
+                    ConfirmationError.Format -> { getString(R.string.error_confirmation_incorrect) }
+                    ConfirmationError.Different -> { getString(R.string.error_confirmation_different) }
+                    ConfirmationError.Correct -> { SUCCESS }
                 }
             }.launchWhenStarted(lifecycleScope)
 
         viewModel.isEmailCorrect
-            .onEach { isCorrect ->
-                binding.etSignupEmailWrapper.error = if (isCorrect) {
-                    SUCCESS
-                } else{
-                    getString(R.string.error_incorrect_email)
+            .onEach { error ->
+                binding.etSignupEmailWrapper.error = when (error) {
+                    EmailError.Empty -> { getString(R.string.error_email_empty) }
+                    EmailError.Format -> { getString(R.string.error_email_incorrect) }
+                    EmailError.Correct -> { SUCCESS }
                 }
             }.launchWhenStarted(lifecycleScope)
     }

@@ -31,7 +31,6 @@ class LoginViewModel @Inject constructor(
     val password: StateFlow<String> = _password.asStateFlow()
 
     private val _isValid = MutableStateFlow(false)
-    val isValid: StateFlow<Boolean> = _isValid.asStateFlow()
 
     fun onSignUpText(view: View) {
         Intent(view.context, SignUpActivity::class.java).also {
@@ -74,16 +73,26 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    val isUsernameCorrect: Flow<Boolean> = username.map {
-        username.value.isNotBlank()
+    val isUsernameCorrect: Flow<UsernameError> = username.map {
+        when {
+            it.isBlank() -> { UsernameError.Empty }
+            it.length < 3 || it.length > 15 -> { UsernameError.Length }
+            !USERNAME_PATTERN.matcher(it).matches() -> { UsernameError.Format }
+            else -> { UsernameError.Correct }
+        }
     }
 
-    val isPasswordCorrect: Flow<Boolean> = password.map {
-        PASSWORD_PATTERN.matcher(it).matches()
+    val isPasswordCorrect: Flow<PasswordError> = password.map {
+        when {
+            it.isBlank() -> { PasswordError.Empty }
+            it.length < 6 || it.length > 15 -> { PasswordError.Length }
+            !PASSWORD_PATTERN.matcher(it).matches() -> { PasswordError.Format }
+            else -> { PasswordError.Correct }
+        }
     }
 
-    val isSubmitEnabled: Flow<Boolean> = combine(isUsernameCorrect, isPasswordCorrect) { username, password ->
-        return@combine username && password
+    val isSubmitEnabled: Flow<Boolean> = combine(username, password) { username, password ->
+        return@combine USERNAME_PATTERN.matcher(username).matches() && PASSWORD_PATTERN.matcher(password).matches()
     }
 
     fun setUsername(username: String){
@@ -94,13 +103,18 @@ class LoginViewModel @Inject constructor(
     }
     companion object {
         private const val TAG = "AuthViewModel"
-
         private val PASSWORD_PATTERN = Pattern.compile(
             "(?=.*[a-zA-Z])" +          // a-z A-Z
                     "(?=\\S+$)" +            //no white spaces
                     ".{6,15}" +              //at least 6 characters
                     "$"
         )
+        private val USERNAME_PATTERN = Pattern.compile(
+            "(?=.*[a-zA-Z])" +          // a-z A-Z
+                    ".{3,15}" +              //at least 3 characters
+                    "$"
+        )
+
     }
 
 }
